@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "restaurant": "The restaurant",
+    "infos": "Info",
+    "order": "Order"
+  },
+  "status": {
+    "open": "Open",
+    "closed": "Closed",
+    "openUntil": "Open · closes at {time}",
+    "closedNow": "Currently closed"
+  },
+  "home": {
+    "heroKicker": "Sushi takeaway · Vienne",
+    "heroTitle": "Fresh sushi,\nmade with love",
+    "heroSubtitle": "Order online and pick up your order at the counter. No commission, paid on site.",
+    "heroOrder": "Order now",
+    "heroMenu": "View the menu",
+    "quickAddress": "Address",
+    "quickHours": "Opening hours",
+    "quickPhone": "Phone",
+    "menuPreviewTitle": "Our menu",
+    "menuPreviewSubtitle": "Makis, California, platters, hot dishes… the best of Japanese street food.",
+    "menuPreviewCta": "Explore the full menu",
+    "ambianceTitle": "Welcome to Sushi Smile",
+    "ambianceText": "Generous, accessible Japanese food, steps from the center of Vienne. Walk in or order online.",
+    "ambianceCta": "Discover the restaurant",
+    "uberTitle": "Also available on Uber Eats",
+    "uberText": "Prefer delivery? Find us on Uber Eats.",
+    "uberCta": "Order on Uber Eats",
+    "takeaway": "Takeaway",
+    "pickupShort": "Counter pickup · 4 rue du 11 Novembre, Vienne",
+    "promoBadge": "Order direct",
+    "promoTitle": "Zero commission, paid on site",
+    "promoText": "Order online, pick up at the counter. No middleman, no hidden fees — you pay at pickup.",
+    "promoCta": "Order now",
+    "categoriesTitle": "Explore the menu",
+    "categoriesSubtitle": "From shareable makis to our signature platters, everything is made fresh on site.",
+    "marqueeTitle": "Homemade, every day",
+    "scrollHint": "Discover"
+  },
+  "menu": {
+    "title": "Menu",
+    "subtitle": "Order online — pickup at the restaurant, pay on site.",
+    "comingSoon": "Online ordering is coming very soon.",
+    "add": "Add",
+    "unavailable": "Unavailable",
+    "demoNote": "Demo menu — dishes, prices and photos will be managed by the restaurant."
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "emptyCta": "Browse the menu",
+    "items": "{count, plural, =0 {0 items} one {# item} other {# items}}",
+    "total": "Total",
+    "checkout": "Checkout",
+    "floating": "Cart",
+    "remove": "Remove"
+  },
+  "checkout": {
+    "title": "Your details",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "phone": "Phone",
+    "phonePlaceholder": "06 12 34 56 78",
+    "pickup": "Pickup time",
+    "pickupPlaceholder": "Choose a time",
+    "noSlots": "No pickup time available right now.",
+    "notes": "Note (optional)",
+    "notesPlaceholder": "No wasabi, allergies, details…",
+    "summary": "Summary",
+    "back": "Back",
+    "confirm": "Place order",
+    "required": "Please fill in name, phone and pickup time.",
+    "today": "Today",
+    "tomorrow": "Tomorrow"
+  },
+  "confirmation": {
+    "title": "Order received!",
+    "orderNumber": "Order #{number}",
+    "message": "Your order has been received. The restaurant must confirm it. Come at your chosen time to pick it up.",
+    "pickup": "Pickup",
+    "demoNote": "Mockup: no order was actually sent.",
+    "done": "Done"
+  },
+  "restaurant": {
+    "title": "The restaurant",
+    "subtitle": "Our world, in pictures.",
+    "comingSoon": "The photo gallery is coming very soon."
+  },
+  "infos": {
+    "title": "Practical info",
+    "subtitle": "Hours, address and contact.",
+    "hoursTitle": "Opening hours",
+    "addressTitle": "Address",
+    "phoneTitle": "Phone",
+    "contactTitle": "Get in touch",
+    "comingSoon": "The contact form is coming very soon."
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "footer": {
+    "tagline": "Sushi takeaway in Vienne. Fresh, generous, homemade.",
+    "hours": "Hours",
+    "contact": "Contact",
+    "navigation": "Navigation",
+    "rights": "All rights reserved.",
+    "madeBy": "Website by Velios AI."
+  },
+  "common": {
+    "closed": "Closed"
+  }
+}

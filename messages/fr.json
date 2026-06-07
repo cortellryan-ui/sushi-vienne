@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "menu": "La carte",
+    "restaurant": "Le restaurant",
+    "infos": "Infos",
+    "order": "Commander"
+  },
+  "status": {
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "openUntil": "Ouvert · ferme à {time}",
+    "closedNow": "Fermé pour le moment"
+  },
+  "home": {
+    "heroKicker": "Sushi à emporter · Vienne",
+    "heroTitle": "Des sushis frais,\nfaits avec amour",
+    "heroSubtitle": "Commandez en ligne et venez récupérer votre commande au comptoir. Sans commission, payé sur place.",
+    "heroOrder": "Commander",
+    "heroMenu": "Voir la carte",
+    "quickAddress": "Adresse",
+    "quickHours": "Horaires",
+    "quickPhone": "Téléphone",
+    "menuPreviewTitle": "Notre carte",
+    "menuPreviewSubtitle": "Makis, California, plateaux, plats chauds… le meilleur de la street-food japonaise.",
+    "menuPreviewCta": "Découvrir toute la carte",
+    "ambianceTitle": "Bienvenue chez Sushi Smile",
+    "ambianceText": "Une cuisine japonaise généreuse et accessible, à deux pas du centre de Vienne. Poussez la porte ou commandez en ligne.",
+    "ambianceCta": "Découvrir le restaurant",
+    "uberTitle": "Aussi disponible sur Uber Eats",
+    "uberText": "Vous préférez la livraison ? Retrouvez-nous sur Uber Eats.",
+    "uberCta": "Commander sur Uber Eats",
+    "takeaway": "À emporter",
+    "pickupShort": "Retrait au comptoir · 4 rue du 11 Novembre, Vienne",
+    "promoBadge": "Commande directe",
+    "promoTitle": "Zéro commission, payé sur place",
+    "promoText": "Commandez en ligne, récupérez votre commande au comptoir. Pas d'intermédiaire, pas de frais cachés — vous payez au retrait.",
+    "promoCta": "Je commande",
+    "categoriesTitle": "Explorez la carte",
+    "categoriesSubtitle": "Du maki à partager au plateau signature, tout est préparé frais sur place.",
+    "marqueeTitle": "Fait maison, chaque jour",
+    "scrollHint": "Découvrir"
+  },
+  "menu": {
+    "title": "La carte",
+    "subtitle": "Commande en ligne — retrait au restaurant, paiement sur place.",
+    "comingSoon": "La carte en ligne arrive très bientôt.",
+    "add": "Ajouter",
+    "unavailable": "Indisponible",
+    "demoNote": "Carte de démonstration — les plats, prix et photos seront gérés par le restaurant."
+  },
+  "cart": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide.",
+    "emptyCta": "Parcourir la carte",
+    "items": "{count, plural, =0 {0 article} one {# article} other {# articles}}",
+    "total": "Total",
+    "checkout": "Commander",
+    "floating": "Panier",
+    "remove": "Retirer"
+  },
+  "checkout": {
+    "title": "Vos coordonnées",
+    "name": "Nom",
+    "namePlaceholder": "Votre nom",
+    "phone": "Téléphone",
+    "phonePlaceholder": "06 12 34 56 78",
+    "pickup": "Créneau de retrait",
+    "pickupPlaceholder": "Choisir un créneau",
+    "noSlots": "Aucun créneau de retrait disponible pour le moment.",
+    "notes": "Note (optionnel)",
+    "notesPlaceholder": "Sans wasabi, allergies, précisions…",
+    "summary": "Récapitulatif",
+    "back": "Retour",
+    "confirm": "Valider la commande",
+    "required": "Merci de remplir nom, téléphone et créneau.",
+    "today": "Aujourd'hui",
+    "tomorrow": "Demain"
+  },
+  "confirmation": {
+    "title": "Commande reçue !",
+    "orderNumber": "Commande n° {number}",
+    "message": "Votre commande a bien été reçue. Le restaurant doit la valider. Présentez-vous au créneau choisi pour le retrait.",
+    "pickup": "Retrait",
+    "demoNote": "Maquette : aucune commande n'a réellement été envoyée.",
+    "done": "Terminer"
+  },
+  "restaurant": {
+    "title": "Le restaurant",
+    "subtitle": "Notre univers, en images.",
+    "comingSoon": "La galerie photos arrive très bientôt."
+  },
+  "infos": {
+    "title": "Infos pratiques",
+    "subtitle": "Horaires, adresse et contact.",
+    "hoursTitle": "Horaires d'ouverture",
+    "addressTitle": "Adresse",
+    "phoneTitle": "Téléphone",
+    "contactTitle": "Nous écrire",
+    "comingSoon": "Le formulaire de contact arrive très bientôt."
+  },
+  "days": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
+  "footer": {
+    "tagline": "Sushi à emporter à Vienne. Frais, généreux, fait maison.",
+    "hours": "Horaires",
+    "contact": "Contact",
+    "navigation": "Navigation",
+    "rights": "Tous droits réservés.",
+    "madeBy": "Site réalisé par Velios AI."
+  },
+  "common": {
+    "closed": "Fermé"
+  }
+}
