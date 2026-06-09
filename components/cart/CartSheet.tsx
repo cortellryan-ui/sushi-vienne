@@ -343,7 +343,6 @@ export function CartSheet() {
                 {tConfirm("pickup")} : {order.pickup}
               </p>
             )}
-            <p className="text-xs text-amber-700">{tConfirm("demoNote")}</p>
             <Button className="mt-2" onClick={close}>
               {tConfirm("done")}
             </Button>
