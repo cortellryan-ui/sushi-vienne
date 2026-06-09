@@ -1,16 +1,15 @@
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
-import { getMockMenu } from "@/lib/mock-data";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMenu } from "@/lib/data/menu";
 import { MenuClient } from "@/components/menu/MenuClient";
 
-export default function MenuPage({
+export default async function MenuPage({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
   setRequestLocale(locale);
-  const t = useTranslations("menu");
-  const menu = getMockMenu();
+  const t = await getTranslations("menu");
+  const menu = await getMenu();
 
   return (
     <div className="container py-10 md:py-14">

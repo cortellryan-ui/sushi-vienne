@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Info } from "lucide-react";
 import type { Category, Product } from "@/lib/types";
-import { CATEGORY_EMOJI } from "@/lib/mock-data";
+import { emojiForCategory } from "@/lib/category-emoji";
 import { ProductCard } from "./ProductCard";
 
 type MenuSection = { category: Category; products: Product[] };
@@ -28,7 +28,7 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
                 href={`#${category.slug}`}
                 className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-white px-4 py-1.5 text-sm font-medium transition hover:border-brand hover:text-brand"
               >
-                <span>{CATEGORY_EMOJI[category.id] ?? "🍣"}</span>
+                <span>{emojiForCategory(category.slug)}</span>
                 {category.name}
               </a>
             </li>
@@ -45,7 +45,7 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
             className="scroll-mt-32"
           >
             <h2 className="mb-4 flex items-center gap-2 font-display text-2xl">
-              <span>{CATEGORY_EMOJI[category.id] ?? "🍣"}</span>
+              <span>{emojiForCategory(category.slug)}</span>
               {category.name}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -53,7 +53,7 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
                 <ProductCard
                   key={product.id}
                   product={product}
-                  emoji={CATEGORY_EMOJI[category.id] ?? "🍣"}
+                  emoji={emojiForCategory(category.slug)}
                 />
               ))}
             </div>
