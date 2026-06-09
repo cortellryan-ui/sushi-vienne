@@ -7,9 +7,14 @@ import { Button } from "@/components/ui/button";
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge";
 import { Reveal } from "@/components/site/Reveal";
 import { HeroParallax } from "@/components/site/HeroParallax";
+import { PromoBanner } from "@/components/site/PromoBanner";
+import { CustomerReviews } from "@/components/site/CustomerReviews";
+import { ZinouButcher } from "@/components/site/ZinouButcher";
+import { googleMeta } from "@/lib/reviews";
 import { RESTAURANT } from "@/lib/restaurant";
 
 const HERO_IMG = "/photos/hero-flamme.jpg";
+const HERO_VIDEO = "/videos/hero.mp4";
 const PROMO_IMG = "/photos/plats/plat-60.jpg";
 
 // Vitrine catégories (photos sans branding visible).
@@ -36,6 +41,7 @@ export default function HomePage({
       <section className="relative flex h-[88vh] min-h-[560px] w-full items-end overflow-hidden bg-ink text-white">
         <HeroParallax
           src={HERO_IMG}
+          video={HERO_VIDEO}
           alt="Cuisson au wok en flammes chez Sushi Smile"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/20" />
@@ -102,37 +108,13 @@ export default function HomePage({
       </section>
 
       {/* ===== BANDEAU PROMO ===== */}
-      <section className="bg-cream py-8 md:py-12">
-        <div className="container">
-          <Reveal className="overflow-hidden rounded-3xl bg-brand-gradient text-white shadow-lg">
-            <div className="grid items-center gap-0 md:grid-cols-2">
-              <div className="p-8 md:p-12">
-                <span className="mb-3 inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-                  {t("promoBadge")}
-                </span>
-                <h2 className="font-display text-3xl leading-tight sm:text-4xl">
-                  {t("promoTitle")}
-                </h2>
-                <p className="mt-3 max-w-md text-white/90">{t("promoText")}</p>
-                <Button asChild variant="ink" className="mt-6">
-                  <Link href="/menu">
-                    {t("promoCta")} <ArrowRight />
-                  </Link>
-                </Button>
-              </div>
-              <div className="relative h-56 w-full md:h-full md:min-h-[300px]">
-                <Image
-                  src={PROMO_IMG}
-                  alt="Dragon roll saumon avocat"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <PromoBanner
+        img={PROMO_IMG}
+        badge={t("promoBadge")}
+        title={t("promoTitle")}
+        cta={t("promoCta")}
+        features={[t("promoFeat1"), t("promoFeat2"), t("promoFeat3")]}
+      />
 
       {/* ===== VITRINE CATÉGORIES (BENTO) ===== */}
       <section className="container py-16 md:py-24">
@@ -191,8 +173,8 @@ export default function HomePage({
         <div className="container grid items-center gap-10 md:grid-cols-2">
           <Reveal className="relative aspect-[4/3] overflow-hidden rounded-3xl">
             <Image
-              src="/photos/restaurant/resto-56.jpg"
-              alt="Préparation de sushis avec ingrédients frais"
+              src="/photos/restaurant/resto-1.jpg"
+              alt="L'équipe Sushi Smile au travail en cuisine"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
@@ -214,6 +196,21 @@ export default function HomePage({
           </Reveal>
         </div>
       </section>
+
+      {/* ===== AVIS CLIENTS (GOOGLE) ===== */}
+      <CustomerReviews
+        kicker={t("reviewsKicker")}
+        title={t("reviewsTitle")}
+        subtitle={t("reviewsSubtitle")}
+        ratingText={googleMeta.rating.toLocaleString(locale, {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1,
+        })}
+        countText={`${googleMeta.count}+ ${t("reviewsWord")}`}
+      />
+
+      {/* ===== RÉASSURANCE : BOUCHERIE ZINOU ===== */}
+      <ZinouButcher />
 
       {/* ===== BANDEAU UBER EATS ===== */}
       <section className="bg-cream">

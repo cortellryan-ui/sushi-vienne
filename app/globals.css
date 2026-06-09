@@ -57,10 +57,16 @@
   .animate-marquee {
     animation: marquee 45s linear infinite;
   }
+  /* Défilement vertical en boucle (colonnes d'avis). La durée est pilotée
+     par --scroll-duration en inline pour varier la vitesse par colonne. */
+  .animate-scroll-y {
+    animation: scroll-y var(--scroll-duration, 40s) linear infinite;
+  }
   .animate-kenburns {
     animation: kenburns 20s ease-in-out infinite alternate;
   }
-  .pause-on-hover:hover .animate-marquee {
+  .pause-on-hover:hover .animate-marquee,
+  .pause-on-hover:hover .animate-scroll-y {
     animation-play-state: paused;
   }
 }
@@ -80,5 +86,22 @@
   }
   to {
     transform: scale(1.16);
+  }
+}
+
+@keyframes scroll-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* Respect des préférences d'accessibilité : on fige les défilements. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-y,
+  .animate-marquee {
+    animation: none;
   }
 }
