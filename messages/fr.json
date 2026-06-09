@@ -36,10 +36,37 @@
     "promoTitle": "Zéro commission, payé sur place",
     "promoText": "Commandez en ligne, récupérez votre commande au comptoir. Pas d'intermédiaire, pas de frais cachés — vous payez au retrait.",
     "promoCta": "Je commande",
+    "promoFeat1": "Zéro commission",
+    "promoFeat2": "Paiement au comptoir",
+    "promoFeat3": "Prêt en ~20 min",
+    "reviewsKicker": "Avis clients",
+    "reviewsTitle": "Ils se régalent chez Sushi Smile",
+    "reviewsSubtitle": "Des centaines de clients nous font confiance. Voici ce qu'ils disent de nos sushis.",
+    "reviewsWord": "avis",
     "categoriesTitle": "Explorez la carte",
     "categoriesSubtitle": "Du maki à partager au plateau signature, tout est préparé frais sur place.",
     "marqueeTitle": "Fait maison, chaque jour",
     "scrollHint": "Découvrir"
+  },
+  "zinou": {
+    "kicker": "Notre engagement qualité",
+    "title": "De la boucherie ZINOU à votre assiette",
+    "badge": "100 % de nos viandes proviennent de la boucherie ZINOU",
+    "text": "Chez Sushi Smile, la viande ne vient jamais de fournisseurs industriels. Nous la sélectionnons directement à la boucherie ZINOU, notre partenaire de confiance. Résultat : une viande fraîche, tracée et préparée sur place — pour des plats que vous dégustez en toute sérénité.",
+    "feat1Title": "Viande fraîche sélectionnée quotidiennement",
+    "feat1Text": "Choisie chaque jour chez le boucher, jamais préparée à l'avance.",
+    "feat2Title": "Circuit court & traçabilité garantie",
+    "feat2Text": "Du boucher à votre assiette, sans intermédiaire industriel.",
+    "feat3Title": "Qualité constante toute l'année",
+    "feat3Text": "Le même niveau d'exigence à chaque commande, en toute saison.",
+    "feat4Title": "Préparation soignée sur place",
+    "feat4Text": "Des produits rigoureusement choisis, cuisinés dans notre atelier.",
+    "productsLabel": "Concerne notamment :",
+    "products": "poulets satés, poulet de nos bowls, brochettes de bœuf au fromage et toutes nos préparations à base de viande.",
+    "cta": "Découvrir nos plats",
+    "imageAlt": "Brochettes de viande grillées et glacées, préparées chez Sushi Smile",
+    "partnerLabel": "Partenaire viande",
+    "partnerName": "Boucherie ZINOU"
   },
   "menu": {
     "title": "La carte",
@@ -75,7 +102,9 @@
     "confirm": "Valider la commande",
     "required": "Merci de remplir nom, téléphone et créneau.",
     "today": "Aujourd'hui",
-    "tomorrow": "Demain"
+    "tomorrow": "Demain",
+    "sending": "Envoi…",
+    "serverError": "Une erreur est survenue. Réessayez ou appelez le restaurant."
   },
   "confirmation": {
     "title": "Commande reçue !",

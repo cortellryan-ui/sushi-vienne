@@ -11,6 +11,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
+import { createOrder } from "@/lib/actions/orders";
 import { formatPrice } from "@/lib/format";
 import {
   generatePickupSlots,
@@ -47,6 +48,8 @@ export function CartSheet() {
   const [pickup, setPickup] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState(false);
   const [order, setOrder] = useState<{ number: number; pickup: string } | null>(
     null,
   );
@@ -78,14 +81,33 @@ export function CartSheet() {
     return `${day} · ${s.time}`;
   }
 
-  function submit() {
+  async function submit() {
+    setServerError(false);
     if (!name.trim() || !phone.trim() || !pickup) {
       setError(true);
       return;
     }
+    setError(false);
+    setSubmitting(true);
+
     const chosen = slots.find((s) => s.value === pickup);
+    const result = await createOrder({
+      customerName: name,
+      customerPhone: phone,
+      pickupTime: pickup, // ISO (slot.value)
+      notes: notes.trim() || null,
+      items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })),
+    });
+
+    setSubmitting(false);
+
+    if (!result.ok) {
+      setServerError(true);
+      return;
+    }
+
     setOrder({
-      number: 1000 + Math.floor(Math.random() * 9000),
+      number: result.orderNumber,
       pickup: chosen ? slotLabel(chosen) : "",
     });
     clear();
@@ -279,6 +301,11 @@ export function CartSheet() {
                   {tCheckout("required")}
                 </p>
               )}
+              {serverError && (
+                <p className="text-sm font-medium text-red-600">
+                  {tCheckout("serverError")}
+                </p>
+              )}
             </div>
 
             <SheetFooter>
@@ -288,8 +315,13 @@ export function CartSheet() {
                   {formatPrice(total, locale)}
                 </span>
               </div>
-              <Button size="lg" className="w-full" onClick={submit}>
-                {tCheckout("confirm")}
+              <Button
+                size="lg"
+                className="w-full"
+                onClick={submit}
+                disabled={submitting}
+              >
+                {submitting ? tCheckout("sending") : tCheckout("confirm")}
               </Button>
             </SheetFooter>
           </>
