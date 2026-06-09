@@ -12,7 +12,9 @@ import {
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { createOrder } from "@/lib/actions/orders";
+import { createOnlineCheckout } from "@/lib/actions/checkout";
 import { formatPrice } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import {
   generatePickupSlots,
   WEEKDAY_KEYS,
@@ -47,6 +49,7 @@ export function CartSheet() {
   const [phone, setPhone] = useState("");
   const [pickup, setPickup] = useState("");
   const [notes, setNotes] = useState("");
+  const [payment, setPayment] = useState<"sur_place" | "en_ligne">("sur_place");
   const [error, setError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(false);
@@ -90,14 +93,29 @@ export function CartSheet() {
     setError(false);
     setSubmitting(true);
 
-    const chosen = slots.find((s) => s.value === pickup);
-    const result = await createOrder({
+    const payload = {
       customerName: name,
       customerPhone: phone,
       pickupTime: pickup, // ISO (slot.value)
       notes: notes.trim() || null,
       items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })),
-    });
+    };
+
+    // Paiement en ligne : on part vers Stripe (la commande sera créée au retour).
+    if (payment === "en_ligne") {
+      const res = await createOnlineCheckout(payload);
+      if (res.ok) {
+        window.location.href = res.url;
+        return;
+      }
+      setSubmitting(false);
+      setServerError(true);
+      return;
+    }
+
+    // Paiement sur place : enregistrement direct.
+    const chosen = slots.find((s) => s.value === pickup);
+    const result = await createOrder(payload);
 
     setSubmitting(false);
 
@@ -296,6 +314,37 @@ export function CartSheet() {
                 </ul>
               </div>
 
+              {/* Choix du mode de paiement */}
+              <div className="space-y-1.5">
+                <Label>{tCheckout("payment")}</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPayment("sur_place")}
+                    className={cn(
+                      "rounded-xl border px-3 py-2.5 text-sm font-medium transition",
+                      payment === "sur_place"
+                        ? "border-brand bg-brand/5 text-brand"
+                        : "bg-white hover:bg-cream",
+                    )}
+                  >
+                    {tCheckout("payOnSite")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPayment("en_ligne")}
+                    className={cn(
+                      "rounded-xl border px-3 py-2.5 text-sm font-medium transition",
+                      payment === "en_ligne"
+                        ? "border-brand bg-brand/5 text-brand"
+                        : "bg-white hover:bg-cream",
+                    )}
+                  >
+                    {tCheckout("payOnline")}
+                  </button>
+                </div>
+              </div>
+
               {error && (
                 <p className="text-sm font-medium text-red-600">
                   {tCheckout("required")}
@@ -321,7 +370,11 @@ export function CartSheet() {
                 onClick={submit}
                 disabled={submitting}
               >
-                {submitting ? tCheckout("sending") : tCheckout("confirm")}
+                {submitting
+                  ? tCheckout("sending")
+                  : payment === "en_ligne"
+                    ? tCheckout("payAndOrder")
+                    : tCheckout("confirm")}
               </Button>
             </SheetFooter>
           </>

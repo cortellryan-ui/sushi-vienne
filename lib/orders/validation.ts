@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/server";
+import { transitionOrder } from "./transition";
 
 type Target = "acceptee" | "declinee";
 
@@ -48,22 +49,26 @@ export async function applyValidation(
     );
   }
 
-  const { error } = await supabase
-    .from("orders")
-    .update({ status: target })
-    .eq("id", id);
-  if (error)
+  const r = await transitionOrder(id, target);
+  if (!r.ok) {
+    if (r.reason === "already")
+      return page(
+        `Commande #${order.order_number}`,
+        "Déjà traitée. Aucune action effectuée.",
+        "#888",
+      );
     return page("Erreur", "La mise à jour a échoué, réessayez.", "#dc2626");
+  }
 
   return target === "acceptee"
     ? page(
         `Commande #${order.order_number} acceptée`,
-        "Elle est passée en cuisine sur la tablette.",
+        "Elle est passée en cuisine (paiement débité si payé en ligne).",
         "#16a34a",
       )
     : page(
         `Commande #${order.order_number} déclinée`,
-        "Pensez à appeler le client pour le prévenir.",
+        "Le client n'est pas débité. Pensez à l'appeler pour le prévenir.",
         "#dc2626",
       );
 }

@@ -104,7 +104,11 @@
     "today": "Today",
     "tomorrow": "Tomorrow",
     "sending": "Sending…",
-    "serverError": "Something went wrong. Please try again or call the restaurant."
+    "serverError": "Something went wrong. Please try again or call the restaurant.",
+    "payment": "Payment",
+    "payOnSite": "On site",
+    "payOnline": "Online",
+    "payAndOrder": "Pay & order"
   },
   "confirmation": {
     "title": "Order received!",

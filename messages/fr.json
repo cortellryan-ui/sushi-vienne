@@ -104,7 +104,11 @@
     "today": "Aujourd'hui",
     "tomorrow": "Demain",
     "sending": "Envoi…",
-    "serverError": "Une erreur est survenue. Réessayez ou appelez le restaurant."
+    "serverError": "Une erreur est survenue. Réessayez ou appelez le restaurant.",
+    "payment": "Paiement",
+    "payOnSite": "Sur place",
+    "payOnline": "En ligne",
+    "payAndOrder": "Payer et commander"
   },
   "confirmation": {
     "title": "Commande reçue !",

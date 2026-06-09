@@ -3,7 +3,6 @@
 import React from "react";
 import type { Review } from "@/lib/reviews";
 import { Stars, GoogleG } from "@/components/site/Stars";
-import { cn } from "@/lib/utils";
 
 /** Initiales colorées en guise d'avatar (pas d'images externes cassables). */
 function initials(name: string) {
