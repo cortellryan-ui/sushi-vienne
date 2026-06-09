@@ -39,6 +39,12 @@ create table if not exists orders (
                      check (status in ('en_attente','acceptee','prete','terminee','declinee')),
   total            numeric(10,2) not null default 0,
   notes            text,
+  -- Paiement (préparation chantier Stripe — option A : autorisation puis débit à l'acceptation)
+  payment_method   text not null default 'sur_place'
+                     check (payment_method in ('sur_place','en_ligne')),
+  payment_status   text not null default 'non_paye'
+                     check (payment_status in ('non_paye','autorise','paye','annule','rembourse')),
+  stripe_payment_intent_id text,
   validation_token uuid not null default gen_random_uuid() unique, -- validation par email
   created_at       timestamptz not null default now()
 );
