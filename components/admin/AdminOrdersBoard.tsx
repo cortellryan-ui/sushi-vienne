@@ -1,23 +1,25 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Bell,
   BellOff,
   Check,
   CircleCheck,
   Clock,
+  LogOut,
   Phone,
-  Plus,
   StickyNote,
   X,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import type { OrderStatus } from "@/lib/types";
+import type { AdminOrder } from "@/lib/data/admin-orders";
 import {
-  MOCK_ORDERS,
-  orderTotal,
-  type AdminOrder,
-} from "@/lib/mock-orders";
+  refreshAdminOrders,
+  updateOrderStatus,
+} from "@/lib/actions/admin-orders";
+import { createClient } from "@/lib/supabase/client";
 import { formatPrice } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -27,34 +29,6 @@ const COLUMNS: { key: OrderStatus; title: string; accent: string }[] = [
   { key: "acceptee", title: "En cuisine", accent: "text-amber-600" },
   { key: "prete", title: "Prêtes", accent: "text-emerald-600" },
   { key: "terminee", title: "Terminées", accent: "text-neutral-500" },
-];
-
-// Pool pour simuler de nouvelles commandes entrantes.
-const SAMPLE = [
-  {
-    customerName: "Inès Lopez",
-    customerPhone: "06 22 44 88 10",
-    items: [
-      { name: "California Saumon Avocat", quantity: 2, unitPrice: 5.9 },
-      { name: "Eau minérale", quantity: 1, unitPrice: 1.8 },
-    ],
-    notes: null as string | null,
-  },
-  {
-    customerName: "Marc Petit",
-    customerPhone: "07 11 99 33 21",
-    items: [
-      { name: "Plateau Mixte", quantity: 1, unitPrice: 27.9 },
-      { name: "Tempura Crevettes", quantity: 1, unitPrice: 7.5 },
-    ],
-    notes: "Baguettes en plus",
-  },
-  {
-    customerName: "Aya Traoré",
-    customerPhone: "06 70 12 65 09",
-    items: [{ name: "Sashimi Saumon", quantity: 2, unitPrice: 8.9 }],
-    notes: null,
-  },
 ];
 
 function beep() {
@@ -78,37 +52,93 @@ function beep() {
   }
 }
 
-export function AdminOrdersBoard() {
-  const [orders, setOrders] = useState<AdminOrder[]>(MOCK_ORDERS);
-  const [soundOn, setSoundOn] = useState(true);
-  const nextNumber = useRef(1043);
+const DAY_MS = 86_400_000;
 
-  function setStatus(id: string, status: OrderStatus) {
-    setOrders((prev) =>
-      prev.map((o) => (o.id === id ? { ...o, status } : o)),
-    );
+function pickupLabel(iso: string): string {
+  const d = new Date(iso);
+  const now = new Date();
+  const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startTarget = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const days = Math.round(
+    (startTarget.getTime() - startToday.getTime()) / DAY_MS,
+  );
+  const time = d.toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const day =
+    days === 0
+      ? "Aujourd'hui"
+      : days === 1
+        ? "Demain"
+        : d.toLocaleDateString("fr-FR", { weekday: "long" });
+  return `${day} · ${time}`;
+}
+
+function receivedLabel(iso: string): string {
+  const mins = Math.max(
+    0,
+    Math.round((Date.now() - new Date(iso).getTime()) / 60000),
+  );
+  if (mins < 1) return "à l'instant";
+  if (mins < 60) return `il y a ${mins} min`;
+  const h = Math.floor(mins / 60);
+  return `il y a ${h} h`;
+}
+
+export function AdminOrdersBoard({
+  initialOrders,
+}: {
+  initialOrders: AdminOrder[];
+}) {
+  const router = useRouter();
+  const [orders, setOrders] = useState<AdminOrder[]>(initialOrders);
+  const [soundOn, setSoundOn] = useState(true);
+  const soundRef = useRef(soundOn);
+  soundRef.current = soundOn;
+
+  // Abonnement Realtime : à chaque changement sur `orders`, on re-fetch.
+  useEffect(() => {
+    const supabase = createClient();
+    const channel = supabase
+      .channel("orders-board")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "orders" },
+        (payload) => {
+          refreshAdminOrders().then(setOrders);
+          if (
+            payload.eventType === "INSERT" &&
+            (payload.new as { status?: string }).status === "en_attente" &&
+            soundRef.current
+          ) {
+            beep();
+          }
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  async function setStatus(id: string, status: OrderStatus) {
+    // Optimiste : on met à jour localement, le Realtime confirmera.
+    setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
+    await updateOrderStatus(id, status);
   }
 
-  function simulate() {
-    const sample = SAMPLE[Math.floor(Math.random() * SAMPLE.length)];
-    const number = nextNumber.current++;
-    const order: AdminOrder = {
-      id: `o-${number}`,
-      number,
-      pickupLabel: "Aujourd'hui · bientôt",
-      receivedLabel: "à l'instant",
-      status: "en_attente",
-      ...sample,
-    };
-    setOrders((prev) => [order, ...prev]);
-    if (soundOn) beep();
+  async function logout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/admin");
+    router.refresh();
   }
 
   const pendingCount = orders.filter((o) => o.status === "en_attente").length;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6">
-      {/* Barre d'actions */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl">Commandes</h1>
@@ -127,20 +157,12 @@ export function AdminOrdersBoard() {
             {soundOn ? <Bell /> : <BellOff />}
             {soundOn ? "Son activé" : "Son coupé"}
           </Button>
-          <Button size="sm" onClick={simulate}>
-            <Plus /> Simuler une commande
+          <Button variant="outline" size="sm" onClick={logout}>
+            <LogOut /> Déconnexion
           </Button>
         </div>
       </div>
 
-      {/* Note maquette */}
-      <p className="mb-4 rounded-xl bg-amber-50 px-4 py-2 text-sm text-amber-800">
-        Maquette : les commandes sont fictives. En production, ce tableau se met
-        à jour en temps réel (Supabase Realtime) et l’email de validation agit
-        sur les mêmes commandes.
-      </p>
-
-      {/* Colonnes par statut */}
       <div className="grid gap-4 lg:grid-cols-4">
         {COLUMNS.map((col) => {
           const list = orders.filter((o) => o.status === col.key);
@@ -154,13 +176,11 @@ export function AdminOrdersBoard() {
                   {list.length}
                 </span>
               </div>
-
               {list.length === 0 && (
                 <p className="rounded-2xl border border-dashed bg-white/50 py-8 text-center text-sm text-muted-foreground">
                   —
                 </p>
               )}
-
               {list.map((o) => (
                 <OrderCard key={o.id} order={o} onStatus={setStatus} />
               ))}
@@ -180,7 +200,6 @@ function OrderCard({
   onStatus: (id: string, status: OrderStatus) => void;
 }) {
   const isPending = order.status === "en_attente";
-
   return (
     <div
       className={cn(
@@ -191,10 +210,9 @@ function OrderCard({
       <div className="flex items-start justify-between">
         <span className="font-display text-xl">#{order.number}</span>
         <span className="text-xs text-muted-foreground">
-          {order.receivedLabel}
+          {receivedLabel(order.createdAt)}
         </span>
       </div>
-
       <p className="mt-1 font-semibold">{order.customerName}</p>
       <a
         href={`tel:${order.customerPhone.replace(/\s/g, "")}`}
@@ -202,11 +220,9 @@ function OrderCard({
       >
         <Phone className="size-3.5" /> {order.customerPhone}
       </a>
-
       <p className="mt-2 flex items-center gap-1.5 rounded-lg bg-cream px-2.5 py-1 text-sm font-medium">
-        <Clock className="size-4 text-brand" /> {order.pickupLabel}
+        <Clock className="size-4 text-brand" /> {pickupLabel(order.pickupTime)}
       </p>
-
       <ul className="mt-3 space-y-1 border-t pt-3 text-sm">
         {order.items.map((i, idx) => (
           <li key={idx} className="flex justify-between gap-2">
@@ -220,21 +236,17 @@ function OrderCard({
           </li>
         ))}
       </ul>
-
       {order.notes && (
         <p className="mt-2 flex items-start gap-1.5 rounded-lg bg-amber-50 px-2.5 py-1.5 text-sm text-amber-800">
           <StickyNote className="mt-0.5 size-3.5 shrink-0" /> {order.notes}
         </p>
       )}
-
       <div className="mt-3 flex items-center justify-between border-t pt-3">
         <span className="text-sm text-muted-foreground">Total</span>
         <span className="font-display text-lg">
-          {formatPrice(orderTotal(order), "fr")}
+          {formatPrice(order.total, "fr")}
         </span>
       </div>
-
-      {/* Actions selon le statut */}
       <div className="mt-3 flex gap-2">
         {order.status === "en_attente" && (
           <>
@@ -278,6 +290,9 @@ function OrderCard({
           <p className="w-full text-center text-sm text-emerald-600">
             ✓ Retirée
           </p>
+        )}
+        {order.status === "declinee" && (
+          <p className="w-full text-center text-sm text-red-600">✕ Déclinée</p>
         )}
       </div>
     </div>
