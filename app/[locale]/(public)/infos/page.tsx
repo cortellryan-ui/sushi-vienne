@@ -4,6 +4,7 @@ import { Clock, ExternalLink, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge";
 import { OpeningHoursTable } from "@/components/site/OpeningHoursTable";
+import { ContactForm } from "@/components/site/ContactForm";
 import { RESTAURANT } from "@/lib/restaurant";
 
 export default function InfosPage({
@@ -77,10 +78,10 @@ export default function InfosPage({
             />
           </div>
 
-          {/* Placeholder formulaire de contact (Resend) */}
-          <section className="rounded-2xl border border-dashed bg-white p-6">
+          {/* Formulaire de contact (Resend) */}
+          <section className="rounded-2xl border bg-white p-6">
             <h2 className="mb-3 font-display text-xl">{t("contactTitle")}</h2>
-            <p className="text-sm text-muted-foreground">{t("comingSoon")}</p>
+            <ContactForm />
           </section>
         </div>
       </div>

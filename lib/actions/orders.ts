@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/server";
+import { sendOrderNotification } from "@/lib/email/order-notification";
 import {
   CreateOrderSchema,
   buildOrderLines,
@@ -46,7 +47,7 @@ export async function createOrder(raw: unknown): Promise<CreateOrderResult> {
       notes: input.notes ?? null,
       // payment_method = 'sur_place', payment_status = 'non_paye' (défauts SQL)
     })
-    .select("id, order_number")
+    .select("id, order_number, validation_token")
     .single();
   if (orderErr || !order) return { ok: false, error: "db" };
 
@@ -55,6 +56,23 @@ export async function createOrder(raw: unknown): Promise<CreateOrderResult> {
     .from("order_items")
     .insert(built.lines.map((l) => ({ ...l, order_id: order.id })));
   if (itemsErr) return { ok: false, error: "db" };
+
+  // 5. Notification email au resto (best-effort : n'échoue pas la commande).
+  await sendOrderNotification({
+    id: order.id,
+    orderNumber: order.order_number,
+    validationToken: order.validation_token,
+    customerName: input.customerName,
+    customerPhone: input.customerPhone,
+    pickupTime: input.pickupTime,
+    notes: input.notes ?? null,
+    total: built.total,
+    items: built.lines.map((l) => ({
+      name: l.product_name,
+      quantity: l.quantity,
+      unitPrice: l.unit_price,
+    })),
+  });
 
   return { ok: true, orderNumber: order.order_number };
 }

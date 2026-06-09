@@ -126,7 +126,14 @@
     "addressTitle": "Address",
     "phoneTitle": "Phone",
     "contactTitle": "Get in touch",
-    "comingSoon": "The contact form is coming very soon."
+    "comingSoon": "The contact form is coming very soon.",
+    "contactName": "Name",
+    "contactEmail": "Email",
+    "contactMessage": "Message",
+    "contactSend": "Send",
+    "contactSending": "Sending…",
+    "contactSuccess": "Thanks! Your message has been sent.",
+    "contactError": "Sending failed. Please try again or call us."
   },
   "days": {
     "monday": "Monday",
