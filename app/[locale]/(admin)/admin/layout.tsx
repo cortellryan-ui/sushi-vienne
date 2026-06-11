@@ -1,5 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
-import { ClipboardList, UtensilsCrossed } from "lucide-react";
+import { ClipboardList, History, UtensilsCrossed } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 /**
@@ -37,6 +37,12 @@ export default function AdminLayout({
               className="flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
             >
               <ClipboardList className="size-4" /> Commandes
+            </Link>
+            <Link
+              href="/admin/historique"
+              className="flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
+            >
+              <History className="size-4" /> Historique
             </Link>
             <Link
               href="/admin/menu"
