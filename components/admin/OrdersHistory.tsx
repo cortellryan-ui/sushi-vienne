@@ -73,7 +73,7 @@ function timeLabel(iso: string): string {
 export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
   const [range, setRange] = useState<Range>("week");
 
-  const { groups, grandTotal, count } = useMemo(() => {
+  const { groups, grandTotal, grandSurPlace, grandEnLigne, count } = useMemo(() => {
     const now = new Date();
     const from =
       range === "today"
@@ -95,17 +95,31 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
 
     // Le chiffre d'affaires ne compte pas les commandes déclinées.
     const isRevenue = (o: AdminOrder) => o.status !== "declinee";
-    const grandTotal = filtered
-      .filter(isRevenue)
-      .reduce((s, o) => s + o.total, 0);
+    const sumBy = (list: AdminOrder[], method?: "sur_place" | "en_ligne") =>
+      list
+        .filter(isRevenue)
+        .filter((o) => !method || o.paymentMethod === method)
+        .reduce((s, o) => s + o.total, 0);
+
+    const grandTotal = sumBy(filtered);
+    const grandSurPlace = sumBy(filtered, "sur_place");
+    const grandEnLigne = sumBy(filtered, "en_ligne");
 
     const groups = Array.from(map.entries()).map(([, list]) => ({
       label: dayLabel(list[0].createdAt),
       orders: list,
-      subtotal: list.filter(isRevenue).reduce((s, o) => s + o.total, 0),
+      subtotal: sumBy(list),
+      surPlace: sumBy(list, "sur_place"),
+      enLigne: sumBy(list, "en_ligne"),
     }));
 
-    return { groups, grandTotal, count: filtered.length };
+    return {
+      groups,
+      grandTotal,
+      grandSurPlace,
+      grandEnLigne,
+      count: filtered.length,
+    };
   }, [orders, range]);
 
   return (
@@ -120,6 +134,14 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
             </span>{" "}
             de chiffre d’affaires (hors déclinées)
           </p>
+          <div className="mt-2 flex flex-wrap gap-2 text-sm">
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-50 px-2.5 py-1 font-medium text-emerald-800">
+              💶 Sur place&nbsp;: {formatPrice(grandSurPlace, "fr")}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-sky-50 px-2.5 py-1 font-medium text-sky-800">
+              💳 En ligne&nbsp;: {formatPrice(grandEnLigne, "fr")}
+            </span>
+          </div>
         </div>
         <div className="flex items-center gap-1 rounded-full border bg-white p-1">
           {RANGES.map((r) => (
@@ -148,14 +170,25 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
         <div className="space-y-8">
           {groups.map((g) => (
             <section key={g.label}>
-              <div className="mb-2 flex items-center justify-between">
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                 <h2 className="font-display text-lg capitalize">{g.label}</h2>
-                <span className="text-sm text-muted-foreground">
-                  {g.orders.length} cmd ·{" "}
-                  <span className="font-semibold text-foreground">
-                    {formatPrice(g.subtotal, "fr")}
+                <div className="flex flex-wrap items-center gap-2 text-sm">
+                  <span className="text-muted-foreground">
+                    💶 sur place{" "}
+                    <span className="font-medium text-foreground">
+                      {formatPrice(g.surPlace, "fr")}
+                    </span>
                   </span>
-                </span>
+                  <span className="text-muted-foreground">
+                    💳 en ligne{" "}
+                    <span className="font-medium text-foreground">
+                      {formatPrice(g.enLigne, "fr")}
+                    </span>
+                  </span>
+                  <span className="rounded-lg bg-ink px-2.5 py-1 font-semibold text-white">
+                    Total {formatPrice(g.subtotal, "fr")}
+                  </span>
+                </div>
               </div>
 
               <div className="overflow-x-auto rounded-2xl border bg-white">
