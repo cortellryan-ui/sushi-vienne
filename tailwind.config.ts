@@ -70,6 +70,8 @@ const config: Config = {
       },
       backgroundImage: {
         "brand-gradient": "linear-gradient(135deg, #F26522 0%, #E63312 100%)",
+        "gradient-conic":
+          "conic-gradient(var(--conic-position), var(--tw-gradient-stops))",
       },
       keyframes: {
         "accordion-down": {
@@ -98,6 +100,15 @@ const config: Config = {
           "0%, 100%": { opacity: "0.45" },
           "50%": { opacity: "0.8" },
         },
+        // Effet « lampe » : allumage progressif + élargissement du faisceau
+        "lamp-on": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "lamp-beam": {
+          from: { transform: "scaleX(0.5)", opacity: "0.4" },
+          to: { transform: "scaleX(1)", opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -106,6 +117,8 @@ const config: Config = {
         "neon-1": "neon-1 14s ease-in-out infinite",
         "neon-2": "neon-2 18s ease-in-out infinite",
         "neon-pulse": "neon-pulse 6s ease-in-out infinite",
+        "lamp-on": "lamp-on 1s ease-in-out 0.2s both",
+        "lamp-beam": "lamp-beam 0.9s ease-in-out 0.2s both",
       },
     },
   },

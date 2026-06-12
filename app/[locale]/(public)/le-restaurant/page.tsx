@@ -5,6 +5,7 @@ import { ArrowRight, Clock } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
+import { LampTitle } from "@/components/site/LampTitle";
 import { AmbianceVideo } from "@/components/site/AmbianceVideo";
 import { RestaurantHighlights } from "@/components/site/RestaurantHighlights";
 
@@ -18,13 +19,8 @@ export default function RestaurantPage({
 
   return (
     <div className="pb-20">
-      {/* En-tête */}
-      <Reveal className="container pt-12 text-center md:pt-16">
-        <h1 className="font-display text-4xl sm:text-5xl">{t("title")}</h1>
-        <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          {t("subtitle")}
-        </p>
-      </Reveal>
+      {/* En-tête — effet « Lamp » */}
+      <LampTitle title={t("title")} subtitle={t("subtitle")} />
 
       {/* Vidéo d'ambiance (parallaxe au scroll) */}
       <div className="my-12 md:my-16">
