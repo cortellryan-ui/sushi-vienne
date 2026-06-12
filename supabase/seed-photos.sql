@@ -1,0 +1,47 @@
+-- Associations photo -> plat (matchs confiants depuis le shooting client).
+-- À exécuter APRÈS seed-menu.sql.
+
+update products set image_url = '/photos/plats/plat-45.jpg' where name = 'Sushi Saumon';
+update products set image_url = '/photos/plats/plat-120.jpg' where name = 'Maki Thon';
+update products set image_url = '/photos/plats/plat-177.jpg' where name = 'Maki Thon Avocat';
+update products set image_url = '/photos/plats/plat-164.jpg' where name = 'California Thon Avocat';
+update products set image_url = '/photos/plats/plat-171.jpg' where name = 'California Surimi Avocat Mayo';
+update products set image_url = '/photos/plats/plat-161.jpg' where name = 'California Poulet Avocat Spicy';
+update products set image_url = '/photos/plats/plat-126.jpg' where name = 'Maki Light Saumon Avocat Menthe';
+update products set image_url = '/photos/plats/plat-105.jpg' where name = 'Maki Light Avocat Cheese Menthe Concombre';
+update products set image_url = '/photos/plats/plat-145.jpg' where name = 'Maki Light Crevettes Tempura Avocat Spicy';
+update products set image_url = '/photos/plats/plat-159.jpg' where name = 'Maki Light Poulet Pané Avocat Mayo';
+update products set image_url = '/photos/plats/plat-175.jpg' where name = 'Maki Light Thon Cuit Avocat Mayo';
+update products set image_url = '/photos/plats/plat-103.jpg' where name = 'Snow Roll Poulet Pané Boursin';
+update products set image_url = '/photos/plats/plat-123.jpg' where name = 'Snow Roll Saumon Cheese';
+update products set image_url = '/photos/plats/plat-82.jpg' where name = 'Crispy Poulet Pané Cheese';
+update products set image_url = '/photos/plats/plat-116.jpg' where name = 'Crispy Concombre Avocat Cheese';
+update products set image_url = '/photos/plats/plat-179.jpg' where name = 'Crispy Chèvre Frais Tomate Séchée Miel';
+update products set image_url = '/photos/plats/plat-141.jpg' where name = 'Crispy Thon Cuit Avocat Mayo';
+update products set image_url = '/photos/plats/plat-156.jpg' where name = 'Crispy Saumon Avocat Boursin';
+update products set image_url = '/photos/plats/plat-151.jpg' where name = 'Salmon Avocat Cheese';
+update products set image_url = '/photos/plats/plat-111.jpg' where name = 'Egg Roll Saumon Avocat';
+update products set image_url = '/photos/plats/plat-60.jpg' where name = 'Dragon';
+update products set image_url = '/photos/plats/plat-130.jpg' where name = 'Chirashi Mixte';
+update products set image_url = '/photos/plats/plat-197.jpg' where name = 'Chirashi Saumon';
+update products set image_url = '/photos/plats/plat-187.jpg' where name = 'Sashimi Saumon x6';
+update products set image_url = '/photos/plats/plat-133.jpg' where name = 'Pokebowl Végétarien';
+update products set image_url = '/photos/plats/plat-137.jpg' where name = 'Pokebowl Thon';
+update products set image_url = '/photos/plats/plat-195.jpg' where name = 'Pokebowl Poulet Pané';
+update products set image_url = '/photos/plats/plat-203.jpg' where name = 'Temaki Saumon';
+update products set image_url = '/photos/plats/plat-37.jpg' where name = 'Yakitori Saumon';
+update products set image_url = '/photos/plats/plat-33.jpg' where name = 'Yakitori Poulet Saté';
+update products set image_url = '/photos/plats/plat-31.jpg' where name = 'Yakitori Bœuf Fromage';
+update products set image_url = '/photos/plats/plat-193.jpg' where name = 'Nouilles aux Crevettes';
+update products set image_url = '/photos/plats/plat-48.jpg' where name = 'Nouilles Mixte';
+update products set image_url = '/photos/plats/plat-9.jpg' where name = 'Nems Crevettes ou Poulet x3';
+update products set image_url = '/photos/plats/plat-17.jpg' where name = 'Gyozas Légumes x3';
+update products set image_url = '/photos/plats/plat-20.jpg' where name = 'Crevettes Tempura x4';
+update products set image_url = '/photos/plats/plat-29.jpg' where name = 'Rouleaux de Printemps x2';
+update products set image_url = '/photos/plats/plat-1.jpg' where name = 'Salade Wakamé';
+update products set image_url = '/photos/plats/plat-24.jpg' where name = 'Soupe Miso';
+update products set image_url = '/photos/plats/plat-7.jpg' where name = 'Riz Nature';
+update products set image_url = '/photos/plats/plat-183.jpg' where name = 'Bobun Bœuf';
+update products set image_url = '/photos/plats/plat-200.jpg' where name = 'Mochi';
+update products set image_url = '/photos/plats/plat-181.jpg' where name = 'Salade Litchi';
+update products set image_url = '/photos/plats/plat-206.jpg' where name = 'Salade de Fruits';
