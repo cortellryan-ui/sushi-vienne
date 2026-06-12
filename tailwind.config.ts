@@ -67,6 +67,7 @@ const config: Config = {
         // Titres impactants "arcade/pop" japonaise + texte courant lisible.
         display: ["var(--font-display)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
       backgroundImage: {
         "brand-gradient": "linear-gradient(135deg, #F26522 0%, #E63312 100%)",

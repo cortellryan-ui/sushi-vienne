@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Bricolage_Grotesque, Fraunces, Inter } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { CartProvider } from "@/lib/cart-context";
 import "../globals.css";
@@ -17,6 +17,14 @@ const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: ["600", "700", "800"],
   variable: "--font-display",
+  display: "swap",
+});
+
+// Serif premium pour les grands titres (look haut de gamme, naturel).
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -46,7 +54,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${bricolage.variable}`}
+      className={`${inter.variable} ${bricolage.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <body className="flex min-h-dvh flex-col font-sans antialiased">

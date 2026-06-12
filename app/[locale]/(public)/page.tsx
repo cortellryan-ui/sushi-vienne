@@ -52,7 +52,7 @@ export default function HomePage({
             <p className="mb-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand backdrop-blur">
               {t("heroKicker")}
             </p>
-            <h1 className="max-w-3xl whitespace-pre-line font-display text-4xl leading-[1.05] drop-shadow-sm sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-3xl whitespace-pre-line font-serif text-5xl font-medium leading-[1.08] sm:text-6xl lg:text-7xl">
               {t("heroTitle")}
             </h1>
             <p className="mt-5 max-w-lg text-base text-white/80 sm:text-lg">
@@ -118,12 +118,9 @@ export default function HomePage({
       {/* ===== VITRINE CATÉGORIES (BENTO) ===== */}
       <section className="container py-16 md:py-24">
         <Reveal className="mb-10 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">
+          <h2 className="font-serif text-4xl font-medium sm:text-5xl md:text-6xl">
             {t("categoriesTitle")}
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            {t("categoriesSubtitle")}
-          </p>
         </Reveal>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5">
