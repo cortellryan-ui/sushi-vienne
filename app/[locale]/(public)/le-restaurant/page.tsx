@@ -17,20 +17,13 @@ export default function RestaurantPage({
   const t = useTranslations("restaurant");
 
   return (
-    <div className="pb-20">
-      {/* En-tête clair (lueur orange douce, cohérent avec le reste du site) */}
-      <header className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 -z-10 h-64 w-[42rem] max-w-full -translate-x-1/2 rounded-full bg-brand/10 blur-[110px]"
-        />
-        <Reveal className="container pt-14 text-center md:pt-20">
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl">
+    <div className="bg-cream pb-20">
+      {/* En-tête — grand titre orange animé (fond homogène, sans lueur) */}
+      <header className="container pt-16 text-center md:pt-24">
+        <Reveal>
+          <h1 className="animate-shimmer bg-gradient-to-r from-brand via-brand-deep to-brand bg-[length:200%_auto] bg-clip-text py-2 font-display text-6xl leading-[1.02] tracking-tight text-transparent sm:text-7xl md:text-8xl">
             {t("title")}
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            {t("subtitle")}
-          </p>
         </Reveal>
       </header>
 

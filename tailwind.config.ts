@@ -109,6 +109,11 @@ const config: Config = {
           from: { transform: "scaleX(0.5)", opacity: "0.4" },
           to: { transform: "scaleX(1)", opacity: "1" },
         },
+        // Brillance qui balaie un texte en dégradé
+        shimmer: {
+          from: { backgroundPosition: "0% center" },
+          to: { backgroundPosition: "200% center" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -119,6 +124,7 @@ const config: Config = {
         "neon-pulse": "neon-pulse 6s ease-in-out infinite",
         "lamp-on": "lamp-on 1s ease-in-out 0.2s both",
         "lamp-beam": "lamp-beam 0.9s ease-in-out 0.2s both",
+        shimmer: "shimmer 5s linear infinite",
       },
     },
   },
