@@ -44,7 +44,7 @@ export function AmbianceVideo() {
     <section className="container">
       <div
         ref={wrapRef}
-        className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] shadow-2xl shadow-black/30 sm:aspect-video lg:aspect-[21/9]"
+        className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] sm:aspect-video lg:aspect-[21/9]"
       >
         <video
           ref={videoRef}
@@ -57,8 +57,6 @@ export function AmbianceVideo() {
           preload="metadata"
           aria-label="Vidéo d'ambiance Sushi Smile"
         />
-        {/* Voile dégradé bas pour la profondeur */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
       </div>
     </section>
   );
