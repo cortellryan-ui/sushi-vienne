@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { getResend, EMAIL_FROM, RESTAURANT_EMAIL } from "@/lib/email/resend";
+import { escapeHtml } from "@/lib/html";
 
 const ContactSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -26,8 +27,8 @@ export async function sendContactMessage(raw: unknown): Promise<ContactResult> {
       replyTo: email,
       subject: `Message de ${name} (site Sushi Smile)`,
       html: `<div style="font-family:system-ui,sans-serif">
-        <p><strong>${name}</strong> &lt;${email}&gt;</p>
-        <p style="white-space:pre-wrap">${message}</p>
+        <p><strong>${escapeHtml(name)}</strong> &lt;${escapeHtml(email)}&gt;</p>
+        <p style="white-space:pre-wrap">${escapeHtml(message)}</p>
       </div>`,
     });
     if (error) {

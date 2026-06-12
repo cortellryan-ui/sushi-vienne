@@ -1,5 +1,6 @@
 import { getResend, EMAIL_FROM, RESTAURANT_EMAIL } from "./resend";
 import { formatPrice } from "@/lib/format";
+import { escapeHtml } from "@/lib/html";
 
 export type OrderEmailData = {
   id: string;
@@ -36,21 +37,22 @@ export async function sendOrderNotification(
   const rows = order.items
     .map(
       (i) =>
-        `<tr><td style="padding:4px 8px">${i.quantity}×</td><td style="padding:4px 8px">${i.name}</td><td style="padding:4px 8px;text-align:right">${formatPrice(i.unitPrice * i.quantity, "fr")}</td></tr>`,
+        `<tr><td style="padding:4px 8px">${i.quantity}×</td><td style="padding:4px 8px">${escapeHtml(i.name)}</td><td style="padding:4px 8px;text-align:right">${formatPrice(i.unitPrice * i.quantity, "fr")}</td></tr>`,
     )
     .join("");
 
+  const phone = escapeHtml(order.customerPhone);
   const html = `
   <div style="font-family:system-ui,sans-serif;max-width:520px;margin:auto">
     <h2 style="color:#E63312">Nouvelle commande #${order.orderNumber}</h2>
-    <p><strong>${order.customerName}</strong> — <a href="tel:${order.customerPhone}">${order.customerPhone}</a></p>
+    <p><strong>${escapeHtml(order.customerName)}</strong> — <a href="tel:${phone}">${phone}</a></p>
     <p>Retrait : <strong>${pickup}</strong></p>
     <table style="width:100%;border-collapse:collapse;border-top:1px solid #eee;border-bottom:1px solid #eee;margin:12px 0">${rows}</table>
     <p style="text-align:right;font-size:18px"><strong>Total : ${formatPrice(order.total, "fr")}</strong></p>
-    ${order.notes ? `<p style="background:#fff7ed;padding:8px;border-radius:8px">Note : ${order.notes}</p>` : ""}
+    ${order.notes ? `<p style="background:#fff7ed;padding:8px;border-radius:8px">Note : ${escapeHtml(order.notes)}</p>` : ""}
     <div style="margin:24px 0;text-align:center">
-      <a href="${acceptUrl}" style="display:inline-block;background:#16a34a;color:#fff;padding:12px 24px;border-radius:9999px;text-decoration:none;margin:0 6px">✓ Accepter</a>
-      <a href="${declineUrl}" style="display:inline-block;background:#dc2626;color:#fff;padding:12px 24px;border-radius:9999px;text-decoration:none;margin:0 6px">✕ Décliner</a>
+      <a href="${acceptUrl}" style="display:inline-block;background:#16a34a;color:#fff;padding:12px 24px;border-radius:9999px;text-decoration:none;margin:0 6px">Accepter</a>
+      <a href="${declineUrl}" style="display:inline-block;background:#dc2626;color:#fff;padding:12px 24px;border-radius:9999px;text-decoration:none;margin:0 6px">Décliner</a>
     </div>
     <p style="color:#888;font-size:12px;text-align:center">Vous pouvez aussi valider depuis la tablette — les deux sont synchronisés.</p>
   </div>`;
