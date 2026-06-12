@@ -39,37 +39,45 @@ export default function RestaurantPage({
         <AmbianceVideo />
       </div>
 
-      {/* Intro éditoriale (image + texte + points forts) */}
-      <section className="container grid items-center gap-10 md:grid-cols-2 md:gap-16">
-        <Reveal className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-xl">
-          <Image
-            src="/photos/restaurant/resto-40.jpg"
-            alt="Notre salle à Vienne"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
-          />
-        </Reveal>
-
-        <Reveal delay={100}>
+      {/* Notre histoire — vrai restaurant japonais à Vienne depuis 2018 */}
+      <section className="container text-center">
+        <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-            Notre maison
+            Restaurant japonais · Depuis 2018
           </span>
-          <h2 className="mt-5 font-display text-3xl leading-tight sm:text-4xl">
-            Le sushi street-food, fait maison à Vienne
+          <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
+            Une cuisine japonaise faite maison, au cœur de Vienne
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Chez Sushi Smile, on assume une cuisine japonaise généreuse et
-            accessible : makis, california, spécialités… préparés sur place avec
-            des produits frais. À déguster au comptoir ou à emporter — et toujours
-            sans commission quand vous commandez ici.
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Sushi Smile, c’est un véritable restaurant japonais installé à Vienne
+            depuis 2018. Chaque maki, chaque california et chaque spécialité est
+            roulé et dressé à la main, sur place, à partir de produits frais
+            choisis chaque jour. On vous accueille au comptoir comme à la maison —
+            à déguster sur place ou à emporter. Poussez la porte : venez goûter la
+            différence du fait maison.
           </p>
-
-          <Button asChild size="lg" className="mt-8">
+          <Button asChild size="lg" className="mt-7">
             <Link href="/menu">
               Voir la carte <ArrowRight />
             </Link>
           </Button>
+        </Reveal>
+
+        {/* Grande photo du lieu, avec badge « Depuis 2018 » */}
+        <Reveal
+          delay={120}
+          className="relative mt-12 aspect-[4/3] w-full overflow-hidden rounded-[2rem] shadow-xl sm:aspect-[16/9]"
+        >
+          <Image
+            src="/photos/restaurant/resto-40.jpg"
+            alt="Notre restaurant à Vienne"
+            fill
+            sizes="(max-width: 1024px) 100vw, 1100px"
+            className="object-cover"
+          />
+          <span className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-1.5 text-sm font-semibold text-ink shadow-md backdrop-blur">
+            Depuis 2018
+          </span>
         </Reveal>
       </section>
 
