@@ -70,12 +70,10 @@
   },
   "menu": {
     "title": "La carte",
-    "subtitle": "Commande en ligne — retrait au restaurant, paiement sur place.",
     "comingSoon": "La carte en ligne arrive très bientôt.",
     "add": "Ajouter",
     "order": "Commander",
-    "unavailable": "Indisponible",
-    "demoNote": "Carte de démonstration — les plats, prix et photos seront gérés par le restaurant."
+    "unavailable": "Indisponible"
   },
   "cart": {
     "title": "Votre panier",

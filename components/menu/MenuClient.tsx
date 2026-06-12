@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { ChevronDown, Info } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import type { Category, Product } from "@/lib/types";
 import { ProductCard } from "./ProductCard";
 import { ProductRow } from "./ProductRow";
@@ -11,7 +10,6 @@ import { cn } from "@/lib/utils";
 type MenuSection = { category: Category; products: Product[] };
 
 export function MenuClient({ menu }: { menu: MenuSection[] }) {
-  const t = useTranslations("menu");
   const [active, setActive] = useState(menu[0]?.category.slug ?? "");
   const [navOpen, setNavOpen] = useState(false); // dépli mobile
 
@@ -19,12 +17,6 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
 
   return (
     <div className="container py-10 md:py-12">
-      {/* Note maquette (discrète) */}
-      <div className="mb-8 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-xs text-muted-foreground">
-        <Info className="size-3.5 shrink-0" />
-        {t("demoNote")}
-      </div>
-
       <div className="flex flex-col gap-6 md:flex-row md:gap-10">
         {/* ===== Catégories sur le côté (dépli) ===== */}
         <aside className="md:w-56 md:shrink-0">

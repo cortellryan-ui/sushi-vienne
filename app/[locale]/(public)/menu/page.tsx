@@ -15,9 +15,6 @@ export default async function MenuPage({
     <div className="bg-gradient-to-b from-[#FFF1E8] via-cream to-white">
       <header className="container pt-12 pb-2 text-center md:pt-16">
         <h1 className="font-serif font-medium text-4xl sm:text-5xl">{t("title")}</h1>
-        <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          {t("subtitle")}
-        </p>
       </header>
 
       <MenuClient menu={menu} />

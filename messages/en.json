@@ -70,12 +70,10 @@
   },
   "menu": {
     "title": "Menu",
-    "subtitle": "Order online — pickup at the restaurant, pay on site.",
     "comingSoon": "Online ordering is coming very soon.",
     "add": "Add",
     "order": "Order",
-    "unavailable": "Unavailable",
-    "demoNote": "Demo menu — dishes, prices and photos will be managed by the restaurant."
+    "unavailable": "Unavailable"
   },
   "cart": {
     "title": "Your cart",
