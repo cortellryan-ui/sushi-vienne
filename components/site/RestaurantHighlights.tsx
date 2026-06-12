@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ChefHat, Leaf, ShieldCheck, Store } from "lucide-react";
+import { Reveal } from "@/components/site/Reveal";
 import { cn } from "@/lib/utils";
 
 // 3 colonnes (photo + titre + texte « Voir plus »). Copywriting propre à Sushi Smile.
@@ -82,19 +83,22 @@ export function RestaurantHighlights() {
       </div>
 
       {/* Bande de réassurance */}
-      <div className="mt-14 grid grid-cols-2 gap-6 border-t pt-10 sm:grid-cols-4">
-        {BADGES.map((b) => {
+      <div className="mt-14 grid grid-cols-2 gap-4 border-t pt-12 sm:grid-cols-4 sm:gap-6">
+        {BADGES.map((b, i) => {
           const Icon = b.icon;
           return (
-            <div
+            <Reveal
               key={b.label}
-              className="flex flex-col items-center gap-2 text-center"
+              delay={i * 110}
+              className="group flex flex-col items-center gap-3 rounded-2xl border bg-white p-5 text-center shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-[0_14px_34px_-12px_rgba(242,101,34,0.55)]"
             >
-              <Icon className="size-7 text-brand" />
-              <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <span className="grid size-14 place-items-center rounded-full bg-brand/10 text-brand transition duration-300 group-hover:scale-110 group-hover:bg-brand-gradient group-hover:text-white group-hover:shadow-lg group-hover:shadow-brand/40">
+                <Icon className="size-7" />
+              </span>
+              <span className="text-xs font-bold uppercase tracking-wide text-foreground">
                 {b.label}
               </span>
-            </div>
+            </Reveal>
           );
         })}
       </div>
