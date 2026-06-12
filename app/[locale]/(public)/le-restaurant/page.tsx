@@ -6,7 +6,6 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { AmbianceVideo } from "@/components/site/AmbianceVideo";
-import { cn } from "@/lib/utils";
 
 const FEATURES = [
   { icon: ChefHat, title: "Fait maison", text: "Tout est préparé sur place, chaque jour." },
@@ -15,16 +14,23 @@ const FEATURES = [
   { icon: MapPin, title: "À Vienne", text: "4 rue du 11 Novembre, 38200." },
 ];
 
-// Grille « bento » : photos du lieu, de l'équipe et des plats, tailles variées.
-const BENTO: { src: string; alt: string; span: string }[] = [
-  { src: "/photos/restaurant/resto-40.jpg", alt: "Notre salle et le comptoir", span: "md:col-span-2 md:row-span-2" },
-  { src: "/photos/restaurant/resto-8.jpg", alt: "Préparation des makis", span: "" },
-  { src: "/photos/plats/plat-100.jpg", alt: "Plateau de sushis", span: "" },
-  { src: "/photos/restaurant/resto-1.jpg", alt: "L'équipe en cuisine", span: "md:col-span-2" },
-  { src: "/photos/plats/plat-130.jpg", alt: "Chirashi maison", span: "md:row-span-2" },
-  { src: "/photos/restaurant/resto-62.jpg", alt: "Au comptoir, prise des commandes", span: "md:col-span-2" },
-  { src: "/photos/plats/plat-99.jpg", alt: "Assortiment de sushis", span: "md:col-span-2" },
-  { src: "/photos/restaurant/resto-20.jpg", alt: "Avocat frais", span: "" },
+// 3 points + 3 photos (présentation uniforme).
+const POINTS = [
+  {
+    src: "/photos/plats/plat-60.jpg",
+    title: "Nos spécialités",
+    text: "Dragon, Rainbow, Gold… découvrez nos créations signatures.",
+  },
+  {
+    src: "/photos/plats/plat-130.jpg",
+    title: "Bowls & chirashis",
+    text: "Chirashis et pokebowls généreux, frais et colorés.",
+  },
+  {
+    src: "/photos/plats/plat-99.jpg",
+    title: "Carte de fidélité",
+    text: "Fidèle depuis 2018 : demandez votre carte au comptoir et cumulez des avantages.",
+  },
 ];
 
 export default function RestaurantPage({
@@ -103,32 +109,29 @@ export default function RestaurantPage({
         </Reveal>
       </section>
 
-      {/* Grille bento */}
+      {/* 3 points + 3 photos (présentation uniforme) */}
       <section className="container mt-20 md:mt-28">
-        <Reveal className="mb-8 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl">En images</h2>
-          <p className="mx-auto mt-2 max-w-md text-muted-foreground">
-            Le lieu, l’équipe et nos créations.
-          </p>
+        <Reveal className="mb-10 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl">Sushi Smile, c’est…</h2>
         </Reveal>
 
-        <div className="grid grid-flow-dense grid-cols-2 gap-3 [grid-auto-rows:9rem] md:grid-cols-4 md:gap-4 md:[grid-auto-rows:11rem]">
-          {BENTO.map((p) => (
-            <div
-              key={p.src}
-              className={cn(
-                "group relative overflow-hidden rounded-2xl bg-cream",
-                p.span,
-              )}
-            >
-              <Image
-                src={p.src}
-                alt={p.alt}
-                fill
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition duration-500 group-hover:scale-105"
-              />
-            </div>
+        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          {POINTS.map((p, i) => (
+            <Reveal key={p.title} delay={i * 100} className="group text-center">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
+                <Image
+                  src={p.src}
+                  alt={p.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="mt-5 font-display text-2xl">{p.title}</h3>
+              <p className="mx-auto mt-2 max-w-xs text-muted-foreground">
+                {p.text}
+              </p>
+            </Reveal>
           ))}
         </div>
       </section>
