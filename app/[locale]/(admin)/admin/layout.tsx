@@ -8,6 +8,13 @@ import { Link } from "@/i18n/navigation";
  *
  * Accès réservé : ces routes sont protégées par Supabase Auth
  * (middleware + requireUser dans chaque page admin).
+ *
+ * NB : on n’appelle PAS requireUser() ici. La page de connexion `/admin`
+ * (app/[locale]/(admin)/admin/page.tsx) est rendue À L’INTÉRIEUR de ce layout.
+ * Un requireUser() au niveau du layout redirigerait un visiteur non connecté
+ * vers `/admin` → qui repasse par ce même layout → boucle de redirection
+ * infinie, rendant le formulaire de connexion inaccessible. La défense en
+ * profondeur reste donc portée par chaque page admin individuellement.
  */
 export default function AdminLayout({
   children,

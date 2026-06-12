@@ -48,11 +48,19 @@ export async function transitionOrder(
     }
   }
 
-  const { error } = await admin
+  // UPDATE conditionnel anti-course (TOCTOU) : la condition `status = en_attente`
+  // est réévaluée par Postgres au moment de l'écriture. En cas de validations
+  // simultanées (tablette + email), seule la PREMIÈRE transition modifie une ligne.
+  const { data: updated, error } = await admin
     .from("orders")
     .update({ status: target, payment_status: paymentStatus })
-    .eq("id", id);
+    .eq("id", id)
+    .eq("status", "en_attente")
+    .select("id");
   if (error) return { ok: false, reason: "error" };
+  // Aucune ligne modifiée = course perdue (déjà traitée entre-temps) : on traite
+  // proprement comme « déjà » sans casser ni rejouer la transition.
+  if (!updated || updated.length === 0) return { ok: false, reason: "already" };
 
   return { ok: true, orderNumber: order.order_number };
 }
