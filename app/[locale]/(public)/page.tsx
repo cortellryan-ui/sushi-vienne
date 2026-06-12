@@ -10,6 +10,7 @@ import { HeroParallax } from "@/components/site/HeroParallax";
 import { PromoBanner } from "@/components/site/PromoBanner";
 import { CustomerReviews } from "@/components/site/CustomerReviews";
 import { ZinouButcher } from "@/components/site/ZinouButcher";
+import { SushiGallery } from "@/components/site/SushiGallery";
 import { googleMeta } from "@/lib/reviews";
 import { RESTAURANT } from "@/lib/restaurant";
 
@@ -167,6 +168,9 @@ export default function HomePage({
           </Button>
         </div>
       </section>
+
+      {/* ===== GALERIE DÉFILANTE (vraies photos de plats) ===== */}
+      <SushiGallery />
 
       {/* ===== AMBIANCE / LE RESTAURANT ===== */}
       <section className="bg-white py-16 md:py-24">

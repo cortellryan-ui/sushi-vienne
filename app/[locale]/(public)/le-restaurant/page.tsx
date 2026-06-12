@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Reveal } from "@/components/site/Reveal";
+import { SushiGallery } from "@/components/site/SushiGallery";
 
 // Grandes photos pleine largeur (style Sushi Shop) — pas de petites vignettes.
 const PHOTOS: { src: string; caption: string }[] = [
@@ -22,12 +23,17 @@ export default function RestaurantPage({
 
   return (
     <div className="py-16 md:py-24">
-      <Reveal className="container mb-12 text-center">
+      <Reveal className="container mb-10 text-center">
         <h1 className="font-display text-4xl sm:text-5xl">{t("title")}</h1>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
           {t("subtitle")}
         </p>
       </Reveal>
+
+      {/* Galerie défilante de nos créations (pleine largeur) */}
+      <div className="mb-16 md:mb-24">
+        <SushiGallery />
+      </div>
 
       <div className="container space-y-6 md:space-y-10">
         {PHOTOS.map((p, i) => (
