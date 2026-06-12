@@ -17,18 +17,6 @@ export const MOCK_CATEGORIES: Category[] = [
   { id: "cat-desserts", name: "Desserts", slug: "desserts", displayOrder: 8, isActive: true },
 ];
 
-/** Emoji de secours par catégorie, pour les visuels placeholder (hors schéma DB). */
-export const CATEGORY_EMOJI: Record<string, string> = {
-  "cat-makis": "🍙",
-  "cat-california": "🍣",
-  "cat-sushi": "🍣",
-  "cat-sashimi": "🐟",
-  "cat-plateaux": "🍱",
-  "cat-chauds": "🍜",
-  "cat-boissons": "🥤",
-  "cat-desserts": "🍡",
-};
-
 function p(
   id: string,
   categoryId: string,
