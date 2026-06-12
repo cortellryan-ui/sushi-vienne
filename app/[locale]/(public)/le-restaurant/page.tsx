@@ -21,7 +21,7 @@ export default function RestaurantPage({
       {/* En-tête — grand titre orange animé (fond homogène, sans lueur) */}
       <header className="container pt-16 text-center md:pt-24">
         <Reveal>
-          <h1 className="animate-shimmer bg-gradient-to-r from-brand via-brand-deep to-brand bg-[length:200%_auto] bg-clip-text py-2 font-serif font-medium text-6xl leading-[1.02] tracking-tight text-transparent sm:text-7xl md:text-8xl">
+          <h1 className="animate-shimmer bg-gradient-to-r from-brand via-brand-deep to-brand bg-[length:200%_auto] bg-clip-text py-2 font-serif font-medium text-5xl leading-[1.02] tracking-tight text-transparent sm:text-6xl md:text-7xl">
             {t("title")}
           </h1>
         </Reveal>

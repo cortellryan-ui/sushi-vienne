@@ -82,7 +82,8 @@ export default function HomePage({
       </section>
 
       {/* ===== BANDEAU COMMANDE ===== */}
-      <section className="sticky top-16 z-20 border-b bg-white/95 backdrop-blur">
+      {/* top-24 sur mobile : le header fait ~96px (barre h-16 + rangée de nav) ; md:top-16 garde 64px sur desktop */}
+      <section className="sticky top-24 z-20 border-b bg-white/95 backdrop-blur md:top-16">
         <div className="container flex flex-wrap items-center justify-between gap-3 py-3">
           <div className="flex items-center gap-3">
             <span className="rounded-full bg-brand-gradient px-4 py-1.5 text-sm font-semibold text-white">

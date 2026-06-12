@@ -14,7 +14,7 @@ export function FloatingCartButton() {
   if (count === 0) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 p-4 md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:hidden">
       <button
         type="button"
         onClick={open}

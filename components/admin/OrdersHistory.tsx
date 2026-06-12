@@ -150,7 +150,7 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
               type="button"
               onClick={() => setRange(r.key)}
               className={cn(
-                "rounded-full px-4 py-1.5 text-sm font-medium transition",
+                "rounded-full px-4 py-2.5 text-sm font-medium transition",
                 range === r.key
                   ? "bg-brand text-white"
                   : "text-muted-foreground hover:bg-cream",
@@ -192,7 +192,7 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
               </div>
 
               <div className="overflow-x-auto rounded-2xl border bg-white">
-                <table className="w-full text-sm">
+                <table className="w-full min-w-[640px] text-sm">
                   <thead className="border-b bg-cream/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
                     <tr>
                       <th className="px-3 py-2">N°</th>

@@ -163,7 +163,7 @@ export function AdminOrdersBoard({
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {COLUMNS.map((col) => {
           const list = orders.filter((o) => o.status === col.key);
           return (
@@ -208,12 +208,12 @@ function OrderCard({
       )}
     >
       <div className="flex items-start justify-between">
-        <span className="font-display text-xl">#{order.number}</span>
+        <span className="font-display text-2xl">#{order.number}</span>
         <span className="text-xs text-muted-foreground">
           {receivedLabel(order.createdAt)}
         </span>
       </div>
-      <p className="mt-1 font-semibold">{order.customerName}</p>
+      <p className="mt-1 text-base font-semibold">{order.customerName}</p>
       <a
         href={`tel:${order.customerPhone.replace(/\s/g, "")}`}
         className="flex items-center gap-1 text-sm text-muted-foreground hover:text-brand"
@@ -223,7 +223,7 @@ function OrderCard({
       <p className="mt-2 flex items-center gap-1.5 rounded-lg bg-cream px-2.5 py-1 text-sm font-medium">
         <Clock className="size-4 text-brand" /> {pickupLabel(order.pickupTime)}
       </p>
-      <ul className="mt-3 space-y-1 border-t pt-3 text-sm">
+      <ul className="mt-3 space-y-1 border-t pt-3 text-base">
         {order.items.map((i, idx) => (
           <li key={idx} className="flex justify-between gap-2">
             <span>
@@ -247,19 +247,22 @@ function OrderCard({
           {formatPrice(order.total, "fr")}
         </span>
       </div>
-      <div className="mt-3 flex gap-2">
+      {/* Rangée d’actions : gros boutons tactiles (kiosque tablette).
+          gap-3 pour éloigner l’action destructive « Décliner ». */}
+      <div className="mt-3 flex gap-3">
         {order.status === "en_attente" && (
           <>
             <Button
-              size="sm"
-              className="flex-1"
+              size="default"
+              className="h-12 flex-1 text-base"
               onClick={() => onStatus(order.id, "acceptee")}
             >
               <Check /> Accepter
             </Button>
             <Button
-              size="sm"
+              size="default"
               variant="destructive"
+              className="h-12 text-base"
               onClick={() => onStatus(order.id, "declinee")}
             >
               <X /> Décliner
@@ -268,8 +271,8 @@ function OrderCard({
         )}
         {order.status === "acceptee" && (
           <Button
-            size="sm"
-            className="flex-1"
+            size="default"
+            className="h-12 flex-1 text-base"
             variant="ink"
             onClick={() => onStatus(order.id, "prete")}
           >
@@ -278,8 +281,8 @@ function OrderCard({
         )}
         {order.status === "prete" && (
           <Button
-            size="sm"
-            className="flex-1"
+            size="default"
+            className="h-12 flex-1 text-base"
             variant="outline"
             onClick={() => onStatus(order.id, "terminee")}
           >

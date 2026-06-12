@@ -46,7 +46,8 @@ export function Header() {
           <OpenStatusBadge className="hidden sm:inline-flex" />
           <LocaleSwitcher />
           <CartButton />
-          <Button asChild size="sm" className="hidden sm:inline-flex">
+          {/* Toujours visible, y compris sur mobile ; padding réduit < 640px pour tenir à côté du logo et du panier */}
+          <Button asChild size="sm" className="px-3 sm:px-4">
             <Link href="/menu">{t("order")}</Link>
           </Button>
         </div>

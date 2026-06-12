@@ -159,7 +159,7 @@ export function CartSheet() {
               </div>
             ) : (
               <>
-                <div className="flex-1 space-y-3 overflow-y-auto px-5">
+                <div className="flex-1 min-h-0 space-y-3 overflow-y-auto px-5">
                   {items.map((item) => (
                     <div
                       key={item.productId}
@@ -175,13 +175,13 @@ export function CartSheet() {
                         <button
                           type="button"
                           onClick={() => dec(item.productId)}
-                          className="grid size-7 place-items-center rounded-full hover:bg-white"
+                          className="grid size-9 place-items-center rounded-full hover:bg-white"
                           aria-label="-"
                         >
                           {item.quantity === 1 ? (
-                            <Trash2 className="size-3.5 text-red-600" />
+                            <Trash2 className="size-4 text-red-600" />
                           ) : (
-                            <Minus className="size-3.5" />
+                            <Minus className="size-4" />
                           )}
                         </button>
                         <span className="w-5 text-center text-sm font-semibold tabular-nums">
@@ -190,10 +190,10 @@ export function CartSheet() {
                         <button
                           type="button"
                           onClick={() => inc(item.productId)}
-                          className="grid size-7 place-items-center rounded-full hover:bg-white"
+                          className="grid size-9 place-items-center rounded-full hover:bg-white"
                           aria-label="+"
                         >
-                          <Plus className="size-3.5" />
+                          <Plus className="size-4" />
                         </button>
                       </div>
                       <span className="w-16 text-right font-semibold tabular-nums">
@@ -240,7 +240,7 @@ export function CartSheet() {
               <SheetDescription>{tCheckout("summary")}</SheetDescription>
             </SheetHeader>
 
-            <div className="flex-1 space-y-4 overflow-y-auto px-5">
+            <div className="flex-1 min-h-0 space-y-4 overflow-y-auto px-5">
               <div className="space-y-1.5">
                 <Label htmlFor="co-name">{tCheckout("name")}</Label>
                 <Input
