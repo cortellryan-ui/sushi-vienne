@@ -3,6 +3,7 @@ import { Footer } from "@/components/site/Footer";
 import { CartSheet } from "@/components/cart/CartSheet";
 import { FloatingCartButton } from "@/components/cart/FloatingCartButton";
 import { OpeningHoursProvider } from "@/components/site/OpeningHoursProvider";
+import { RefreshToHome } from "@/components/site/RefreshToHome";
 import { getOpeningHours } from "@/lib/data/opening-hours";
 
 /** Habillage des pages publiques : header noir, footer, panier. */
@@ -16,6 +17,7 @@ export default async function PublicLayout({
 
   return (
     <OpeningHoursProvider hours={hours}>
+      <RefreshToHome />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
