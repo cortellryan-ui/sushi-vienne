@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown, Info } from "lucide-react";
 import type { Category, Product } from "@/lib/types";
-import { photoForCategory } from "@/lib/category-photos";
 import { ProductCard } from "./ProductCard";
+import { ProductRow } from "./ProductRow";
 import { cn } from "@/lib/utils";
 
 type MenuSection = { category: Category; products: Product[] };
@@ -83,16 +83,47 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
               <h2 className="mb-6 font-serif font-medium text-3xl">
                 {current.category.name}
               </h2>
-              <div className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-3">
-                {current.products.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    image={photoForCategory(current.category.slug)}
-                    special={current.category.slug === "specialites"}
-                  />
-                ))}
-              </div>
+
+              {(() => {
+                const special = current.category.slug === "specialites";
+                const withPhoto = current.products.filter((p) => p.imageUrl);
+                const withoutPhoto = current.products.filter((p) => !p.imageUrl);
+                return (
+                  <>
+                    {/* Plats avec photo : en cartes, en haut */}
+                    {withPhoto.length > 0 && (
+                      <div className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-3">
+                        {withPhoto.map((product) => (
+                          <ProductCard
+                            key={product.id}
+                            product={product}
+                            image={product.imageUrl}
+                            special={special}
+                          />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Plats sans photo : en liste propre (pas de doublon) */}
+                    {withoutPhoto.length > 0 && (
+                      <div
+                        className={cn(
+                          "space-y-3",
+                          withPhoto.length > 0 && "mt-8",
+                        )}
+                      >
+                        {withoutPhoto.map((product) => (
+                          <ProductRow
+                            key={product.id}
+                            product={product}
+                            special={special}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
             </section>
           )}
         </div>
