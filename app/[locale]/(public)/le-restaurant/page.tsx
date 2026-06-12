@@ -1,37 +1,12 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { ArrowRight, ChefHat, Clock, Leaf, MapPin, ShoppingBag } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { AmbianceVideo } from "@/components/site/AmbianceVideo";
-
-const FEATURES = [
-  { icon: ChefHat, title: "Fait maison", text: "Tout est préparé sur place, chaque jour." },
-  { icon: Leaf, title: "Produits frais", text: "Poisson, légumes et riz choisis pour leur fraîcheur." },
-  { icon: ShoppingBag, title: "Sur place & à emporter", text: "Commandez en ligne, récupérez au comptoir." },
-  { icon: MapPin, title: "À Vienne", text: "4 rue du 11 Novembre, 38200." },
-];
-
-// 3 points + 3 photos (présentation uniforme).
-const POINTS = [
-  {
-    src: "/photos/plats/plat-60.jpg",
-    title: "Nos spécialités",
-    text: "Dragon, Rainbow, Gold… découvrez nos créations signatures.",
-  },
-  {
-    src: "/photos/plats/plat-130.jpg",
-    title: "Bowls & chirashis",
-    text: "Chirashis et pokebowls généreux, frais et colorés.",
-  },
-  {
-    src: "/photos/plats/plat-99.jpg",
-    title: "Carte de fidélité",
-    text: "Fidèle depuis 2018 : demandez votre carte au comptoir et cumulez des avantages.",
-  },
-];
+import { RestaurantHighlights } from "@/components/site/RestaurantHighlights";
 
 export default function RestaurantPage({
   params: { locale },
@@ -82,25 +57,6 @@ export default function RestaurantPage({
             sans commission quand vous commandez ici.
           </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {FEATURES.map((f) => {
-              const Icon = f.icon;
-              return (
-                <div key={f.title} className="flex gap-3">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-gradient text-white shadow-md shadow-brand/20">
-                    <Icon className="size-5" />
-                  </span>
-                  <div>
-                    <h3 className="font-semibold leading-snug">{f.title}</h3>
-                    <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
-                      {f.text}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
           <Button asChild size="lg" className="mt-8">
             <Link href="/menu">
               Voir la carte <ArrowRight />
@@ -109,32 +65,10 @@ export default function RestaurantPage({
         </Reveal>
       </section>
 
-      {/* 3 points + 3 photos (présentation uniforme) */}
-      <section className="container mt-20 md:mt-28">
-        <Reveal className="mb-10 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl">Sushi Smile, c’est…</h2>
-        </Reveal>
-
-        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
-          {POINTS.map((p, i) => (
-            <Reveal key={p.title} delay={i * 100} className="group text-center">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
-                <Image
-                  src={p.src}
-                  alt={p.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-              <h3 className="mt-5 font-display text-2xl">{p.title}</h3>
-              <p className="mx-auto mt-2 max-w-xs text-muted-foreground">
-                {p.text}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      {/* Points forts (3 colonnes « Voir plus » + bande de réassurance) */}
+      <div className="mt-20 md:mt-28">
+        <RestaurantHighlights />
+      </div>
 
       {/* Bandeau CTA */}
       <section className="container mt-20 md:mt-28">
