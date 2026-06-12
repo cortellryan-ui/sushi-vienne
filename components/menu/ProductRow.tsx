@@ -41,12 +41,12 @@ export function ProductRow({
           <h3 className="font-medium">{product.name}</h3>
           {veggie && (
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-semibold text-white">
-              <Leaf className="size-2.5" /> Veggie
+              <Leaf className="size-2.5" /> {t("veggie")}
             </span>
           )}
           {special && (
             <span className="rounded-full bg-brand-deep px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-              Spécialité
+              {t("specialite")}
             </span>
           )}
         </div>

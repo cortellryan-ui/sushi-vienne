@@ -36,22 +36,17 @@ export default function RestaurantPage({
       <section className="container text-center">
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-            Restaurant japonais · Depuis 2018
+            {t("pageKicker")}
           </span>
           <h2 className="mx-auto mt-5 max-w-3xl font-serif font-medium text-3xl leading-tight sm:text-4xl md:text-5xl">
-            Une cuisine japonaise faite maison, au cœur de Vienne
+            {t("pageTitle")}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Sushi Smile, c’est un véritable restaurant japonais installé à Vienne
-            depuis 2018. Chaque maki, chaque california et chaque spécialité est
-            roulé et dressé à la main, sur place, à partir de produits frais
-            choisis chaque jour. On vous accueille au comptoir comme à la maison —
-            à déguster sur place ou à emporter. Poussez la porte : venez goûter la
-            différence du fait maison.
+            {t("story")}
           </p>
           <Button asChild size="lg" className="mt-7">
             <Link href="/menu">
-              Voir la carte <ArrowRight />
+              {t("viewMenu")} <ArrowRight />
             </Link>
           </Button>
         </Reveal>
@@ -63,13 +58,13 @@ export default function RestaurantPage({
         >
           <Image
             src="/photos/restaurant/resto-40.jpg"
-            alt="Notre restaurant à Vienne"
+            alt={t("imageAlt")}
             fill
             sizes="(max-width: 1024px) 100vw, 1100px"
             className="object-cover"
           />
           <span className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-1.5 text-sm font-semibold text-ink shadow-md backdrop-blur">
-            Depuis 2018
+            {t("since2018")}
           </span>
         </Reveal>
       </section>
@@ -92,20 +87,20 @@ export default function RestaurantPage({
           />
           <div className="relative">
             <h2 className="font-serif font-medium text-3xl sm:text-4xl">
-              Une envie ? Commandez en quelques clics.
+              {t("ctaTitle")}
             </h2>
             <p className="mx-auto mt-3 max-w-md text-white/70">
-              Retrait au restaurant, paiement sur place ou en ligne.
+              {t("ctaText")}
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg">
                 <Link href="/menu">
-                  Commander <ArrowRight />
+                  {t("ctaOrder")} <ArrowRight />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/30 bg-white/5 text-white hover:bg-white/10">
                 <Link href="/infos">
-                  <Clock /> Horaires & adresse
+                  <Clock /> {t("ctaHours")}
                 </Link>
               </Button>
             </div>

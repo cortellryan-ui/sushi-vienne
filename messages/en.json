@@ -70,10 +70,11 @@
   },
   "menu": {
     "title": "Menu",
-    "comingSoon": "Online ordering is coming very soon.",
     "add": "Add",
     "order": "Order",
-    "unavailable": "Unavailable"
+    "unavailable": "Unavailable",
+    "veggie": "Veggie",
+    "specialite": "Specialty"
   },
   "cart": {
     "title": "Your cart",
@@ -114,13 +115,42 @@
     "orderNumber": "Order #{number}",
     "message": "Your order has been received. The restaurant must confirm it. Come at your chosen time to pick it up.",
     "pickup": "Pickup",
-    "demoNote": "Mockup: no order was actually sent.",
     "done": "Done"
+  },
+  "onlinePayment": {
+    "authorized": "Payment authorized",
+    "orderNumber": "Order #{number}",
+    "authorizedMessage": "Your order has been received. The restaurant must confirm it — you will only be charged once it is accepted. Come at your chosen time to pick it up.",
+    "backToMenu": "Back to the menu",
+    "notConfirmed": "Payment not confirmed",
+    "notConfirmedMessage": "The payment could not be confirmed. You have not been charged. Try again or choose \"pay on site\"."
   },
   "restaurant": {
     "title": "The restaurant",
-    "subtitle": "Our world, in pictures.",
-    "comingSoon": "The photo gallery is coming very soon."
+    "pageKicker": "Japanese restaurant · Since 2018",
+    "pageTitle": "Homemade Japanese cuisine, in the heart of Vienne",
+    "story": "Sushi Smile is a genuine Japanese restaurant, based in Vienne since 2018. Every maki, every California roll and every specialty is rolled and plated by hand, on site, from fresh ingredients selected daily. We welcome you at the counter like family — to enjoy in or take away. Push the door open: come taste the difference of homemade.",
+    "viewMenu": "View the menu",
+    "imageAlt": "Our restaurant in Vienne",
+    "since2018": "Since 2018",
+    "ctaTitle": "Hungry? Order in just a few clicks.",
+    "ctaText": "Pickup at the restaurant, pay on site or online.",
+    "ctaOrder": "Order now",
+    "ctaHours": "Hours & address"
+  },
+  "highlights": {
+    "point1Title": "Order online, at counter prices",
+    "point1Text": "Find our whole menu on the site: makis, California rolls, poke bowls, chirashis, specialties… at the same price as in the restaurant, with no commission. You order online and pick up your fresh order at the counter, ready at your chosen time. Pay on site or online, whichever you prefer.",
+    "point2Title": "Quality & freshness",
+    "point2Text": "At Sushi Smile, quality is at the heart of everything. Our sushi is rolled and plated on site, every day, from carefully selected fresh ingredients. Strict hygiene and craftsmanship at every step, so every bite lives up to your expectations.",
+    "point3Title": "Your loyalty rewarded",
+    "point3Text": "A regular since 2018? We thank you the way you deserve. With our loyalty card, every order brings you closer to tasty rewards. Ask for your card at the counter and enjoy it on every visit to Sushi Smile.",
+    "badgeFreshness": "Freshness guaranteed",
+    "badgeHomemade": "Homemade",
+    "badgeSecurePayment": "100% secure payment",
+    "badgePickup": "Pickup at the restaurant",
+    "seeMore": "See more",
+    "seeLess": "See less"
   },
   "infos": {
     "title": "Practical info",
@@ -129,7 +159,6 @@
     "addressTitle": "Address",
     "phoneTitle": "Phone",
     "contactTitle": "Get in touch",
-    "comingSoon": "The contact form is coming very soon.",
     "contactName": "Name",
     "contactEmail": "Email",
     "contactMessage": "Message",
@@ -168,5 +197,9 @@
   },
   "common": {
     "closed": "Closed"
+  },
+  "notFound": {
+    "message": "This page doesn't exist.",
+    "back": "Back home"
   }
 }

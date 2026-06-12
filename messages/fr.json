@@ -70,10 +70,11 @@
   },
   "menu": {
     "title": "La carte",
-    "comingSoon": "La carte en ligne arrive très bientôt.",
     "add": "Ajouter",
     "order": "Commander",
-    "unavailable": "Indisponible"
+    "unavailable": "Indisponible",
+    "veggie": "Veggie",
+    "specialite": "Spécialité"
   },
   "cart": {
     "title": "Votre panier",
@@ -114,13 +115,42 @@
     "orderNumber": "Commande n° {number}",
     "message": "Votre commande a bien été reçue. Le restaurant doit la valider. Présentez-vous au créneau choisi pour le retrait.",
     "pickup": "Retrait",
-    "demoNote": "Maquette : aucune commande n'a réellement été envoyée.",
     "done": "Terminer"
+  },
+  "onlinePayment": {
+    "authorized": "Paiement autorisé",
+    "orderNumber": "Commande n° {number}",
+    "authorizedMessage": "Votre commande a bien été reçue. Le restaurant doit la valider — vous ne serez débité qu'à l'acceptation. Présentez-vous au créneau choisi pour le retrait.",
+    "backToMenu": "Retour à la carte",
+    "notConfirmed": "Paiement non confirmé",
+    "notConfirmedMessage": "Le paiement n'a pas pu être confirmé. Vous n'avez pas été débité. Réessayez ou choisissez « payer sur place »."
   },
   "restaurant": {
     "title": "Le restaurant",
-    "subtitle": "Notre univers, en images.",
-    "comingSoon": "La galerie photos arrive très bientôt."
+    "pageKicker": "Restaurant japonais · Depuis 2018",
+    "pageTitle": "Une cuisine japonaise faite maison, au cœur de Vienne",
+    "story": "Sushi Smile, c'est un véritable restaurant japonais installé à Vienne depuis 2018. Chaque maki, chaque california et chaque spécialité est roulé et dressé à la main, sur place, à partir de produits frais choisis chaque jour. On vous accueille au comptoir comme à la maison — à déguster sur place ou à emporter. Poussez la porte : venez goûter la différence du fait maison.",
+    "viewMenu": "Voir la carte",
+    "imageAlt": "Notre restaurant à Vienne",
+    "since2018": "Depuis 2018",
+    "ctaTitle": "Une envie ? Commandez en quelques clics.",
+    "ctaText": "Retrait au restaurant, paiement sur place ou en ligne.",
+    "ctaOrder": "Commander",
+    "ctaHours": "Horaires & adresse"
+  },
+  "highlights": {
+    "point1Title": "Commandez en ligne, au prix du comptoir",
+    "point1Text": "Retrouvez toute notre carte sur le site : makis, california, pokebowls, chirashis, spécialités… au même prix qu'au restaurant, et sans commission. Vous commandez en ligne, vous récupérez votre commande au comptoir, fraîche et prête au créneau choisi. Paiement sur place ou en ligne, comme vous préférez.",
+    "point2Title": "Qualité & fraîcheur",
+    "point2Text": "Chez Sushi Smile, la qualité est au cœur de tout. Nos sushis sont roulés et dressés sur place, chaque jour, à partir de produits frais soigneusement sélectionnés. Hygiène stricte et savoir-faire à chaque étape, pour que chaque bouchée soit à la hauteur de vos attentes.",
+    "point3Title": "Votre fidélité récompensée",
+    "point3Text": "Fidèle depuis 2018 ? On vous remercie comme il se doit. Avec notre carte de fidélité, chaque commande vous rapproche d'avantages gourmands. Demandez votre carte au comptoir et profitez-en à chaque passage chez Sushi Smile.",
+    "badgeFreshness": "Fraîcheur garantie",
+    "badgeHomemade": "Fait maison",
+    "badgeSecurePayment": "Paiement 100% sécurisé",
+    "badgePickup": "Retrait au restaurant",
+    "seeMore": "Voir plus",
+    "seeLess": "Voir moins"
   },
   "infos": {
     "title": "Infos pratiques",
@@ -129,7 +159,6 @@
     "addressTitle": "Adresse",
     "phoneTitle": "Téléphone",
     "contactTitle": "Nous écrire",
-    "comingSoon": "Le formulaire de contact arrive très bientôt.",
     "contactName": "Nom",
     "contactEmail": "Email",
     "contactMessage": "Message",
@@ -168,5 +197,9 @@
   },
   "common": {
     "closed": "Fermé"
+  },
+  "notFound": {
+    "message": "Cette page n'existe pas (ou plus).",
+    "back": "Retour à l'accueil"
   }
 }

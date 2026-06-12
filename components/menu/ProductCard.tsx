@@ -59,13 +59,13 @@ export function ProductCard({
 
         {veggie && (
           <span className="absolute left-2 top-2 z-10 inline-flex items-center gap-1 rounded-full bg-emerald-500 px-2.5 py-0.5 text-[11px] font-semibold text-white shadow-sm">
-            <Leaf className="size-3" /> Veggie
+            <Leaf className="size-3" /> {t("veggie")}
           </span>
         )}
 
         {special && (
           <span className="absolute right-2 top-2 z-10 rounded-full bg-brand-deep px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm">
-            Spécialité
+            {t("specialite")}
           </span>
         )}
 
