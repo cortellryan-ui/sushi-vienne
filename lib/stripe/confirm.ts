@@ -17,9 +17,17 @@ export async function confirmOnlineOrder(
   const stripe = getStripe();
   if (!stripe) return { ok: false };
 
-  const session = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: ["payment_intent", "line_items.data.price.product"],
-  });
+  let session;
+  try {
+    session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ["payment_intent", "line_items.data.price.product"],
+    });
+  } catch (e) {
+    // session_id invalide ou expiré : Stripe lève une erreur. On échoue
+    // proprement, la page /commande/confirmee gère déjà le cas ok:false.
+    console.error("Échec de récupération de la session Stripe :", e);
+    return { ok: false };
+  }
 
   const pi = session.payment_intent;
   if (!pi || typeof pi === "string" || pi.status !== "requires_capture") {

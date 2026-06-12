@@ -30,8 +30,12 @@ export async function sendContactMessage(raw: unknown): Promise<ContactResult> {
         <p style="white-space:pre-wrap">${message}</p>
       </div>`,
     });
+    if (error) {
+      console.error("Échec d'envoi du message de contact (Resend) :", error);
+    }
     return { ok: !error };
-  } catch {
+  } catch (e) {
+    console.error("Erreur inattendue lors de l'envoi du message de contact :", e);
     return { ok: false };
   }
 }

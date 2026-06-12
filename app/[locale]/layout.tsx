@@ -29,9 +29,27 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
   title: "Sushi Smile — Sushi à emporter à Vienne",
   description:
     "Sushi frais à emporter à Vienne (38200). Commandez en ligne, retrait au comptoir, paiement sur place. Aussi sur Uber Eats.",
+  openGraph: {
+    title: "Sushi Smile — Sushi à emporter à Vienne",
+    description:
+      "Sushi frais à emporter à Vienne (38200). Commandez en ligne, retrait au comptoir, paiement sur place. Aussi sur Uber Eats.",
+    type: "website",
+    locale: "fr_FR",
+    images: [
+      {
+        url: "/photos/hero-flamme.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sushi Smile — sushis à emporter à Vienne",
+      },
+    ],
+  },
 };
 
 export function generateStaticParams() {
