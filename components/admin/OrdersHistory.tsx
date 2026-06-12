@@ -136,10 +136,10 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
           </p>
           <div className="mt-2 flex flex-wrap gap-2 text-sm">
             <span className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-50 px-2.5 py-1 font-medium text-emerald-800">
-              💶 Sur place&nbsp;: {formatPrice(grandSurPlace, "fr")}
+              Sur place&nbsp;: {formatPrice(grandSurPlace, "fr")}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-lg bg-sky-50 px-2.5 py-1 font-medium text-sky-800">
-              💳 En ligne&nbsp;: {formatPrice(grandEnLigne, "fr")}
+              En ligne&nbsp;: {formatPrice(grandEnLigne, "fr")}
             </span>
           </div>
         </div>
@@ -174,13 +174,13 @@ export function OrdersHistory({ orders }: { orders: AdminOrder[] }) {
                 <h2 className="font-display text-lg capitalize">{g.label}</h2>
                 <div className="flex flex-wrap items-center gap-2 text-sm">
                   <span className="text-muted-foreground">
-                    💶 sur place{" "}
+                    Sur place{" "}
                     <span className="font-medium text-foreground">
                       {formatPrice(g.surPlace, "fr")}
                     </span>
                   </span>
                   <span className="text-muted-foreground">
-                    💳 en ligne{" "}
+                    En ligne{" "}
                     <span className="font-medium text-foreground">
                       {formatPrice(g.enLigne, "fr")}
                     </span>

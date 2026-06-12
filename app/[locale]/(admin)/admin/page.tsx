@@ -18,8 +18,8 @@ export default async function AdminLoginPage({
     <div className="grid place-items-center px-4 py-16">
       <div className="w-full max-w-sm rounded-3xl border bg-white p-8 shadow-sm">
         <div className="mb-6 text-center">
-          <span className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-brand-gradient text-2xl">
-            🍣
+          <span className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-brand-gradient font-display text-xl font-bold text-white">
+            S
           </span>
           <h1 className="font-display text-2xl">Espace restaurant</h1>
           <p className="mt-1 text-sm text-muted-foreground">

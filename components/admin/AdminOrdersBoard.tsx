@@ -288,11 +288,11 @@ function OrderCard({
         )}
         {order.status === "terminee" && (
           <p className="w-full text-center text-sm text-emerald-600">
-            ✓ Retirée
+            Retirée
           </p>
         )}
         {order.status === "declinee" && (
-          <p className="w-full text-center text-sm text-red-600">✕ Déclinée</p>
+          <p className="w-full text-center text-sm text-red-600">Déclinée</p>
         )}
       </div>
     </div>

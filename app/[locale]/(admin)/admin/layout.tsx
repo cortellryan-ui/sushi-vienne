@@ -6,8 +6,8 @@ import { Link } from "@/i18n/navigation";
  * Habillage admin (kiosque) — distinct des pages publiques : pas de header
  * client, fond sombre, navigation Commandes / Menu. Français uniquement.
  *
- * ⚠️ Maquette : aucune authentification réelle. La v1 protégera ces routes
- * via Supabase Auth (middleware + vérification de session).
+ * Accès réservé : ces routes sont protégées par Supabase Auth
+ * (middleware + requireUser dans chaque page admin).
  */
 export default function AdminLayout({
   children,
@@ -23,8 +23,8 @@ export default function AdminLayout({
       <header className="sticky top-0 z-40 border-b border-white/10 bg-ink text-white">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
           <Link href="/admin/commandes" className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-gradient">
-              🍣
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-gradient font-display text-sm font-bold text-white">
+              S
             </span>
             <span className="font-display tracking-wide">SUSHI SMILE</span>
             <span className="ml-1 rounded bg-white/10 px-2 py-0.5 text-[11px] uppercase tracking-wider text-white/70">

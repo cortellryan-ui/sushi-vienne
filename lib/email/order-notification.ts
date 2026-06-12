@@ -59,7 +59,7 @@ export async function sendOrderNotification(
     const { error } = await resend.emails.send({
       from: EMAIL_FROM,
       to: RESTAURANT_EMAIL,
-      subject: `🍣 Commande #${order.orderNumber} — ${order.customerName}`,
+      subject: `Commande #${order.orderNumber} — ${order.customerName}`,
       html,
     });
     if (error) {

@@ -2,7 +2,7 @@
  * Avis clients Google affichés sur l'accueil.
  *
  * VRAIS avis Google du restaurant Sushi Smile (Vienne), retranscrits depuis
- * les captures fournies par le client. Sélection des avis 4–5★ pour la section
+ * les captures fournies par le client. Sélection des avis 4–5 pour la section
  * vitrine. Textes parfois raccourcis pour la lisibilité du carrousel.
  */
 
@@ -46,7 +46,7 @@ export const reviews: Review[] = [
   },
   {
     name: "Maria Pinston",
-    text: "Un vrai régal. Je recommande à 100000%. La gentillesse de la vendeuse fait du bien ❤️ Meilleur Californien, la qualité au top.",
+    text: "Un vrai régal. Je recommande à 100000%. La gentillesse de la vendeuse fait du bien  Meilleur Californien, la qualité au top.",
     rating: 5,
     role: "Avis Google",
   },
@@ -214,13 +214,13 @@ export const reviews: Review[] = [
   },
   {
     name: "H D",
-    text: "Porte super bien son nom : accueil souriant et chaleureux, lieu propre et beaucoup de choix, rapport qualité-prix 👌 Délicieux, je recommande.",
+    text: "Porte super bien son nom : accueil souriant et chaleureux, lieu propre et beaucoup de choix, rapport qualité-prix  Délicieux, je recommande.",
     rating: 5,
     role: "Avis Google",
   },
   {
     name: "Maïssa Demircan",
-    text: "Personnel très sympathique, c'était très bon et j'ai surtout beaucoup aimé les nems 😍 Merci beaucoup.",
+    text: "Personnel très sympathique, c'était très bon et j'ai surtout beaucoup aimé les nems  Merci beaucoup.",
     rating: 5,
     role: "Avis Google",
   },
@@ -250,7 +250,7 @@ export const reviews: Review[] = [
   },
   {
     name: "Line Bouquin",
-    text: "Vient juste d'y passer, très bon accueil, super bonne salade de choux et vraiment pas voleur sur les prix. Je recommande, merci beaucoup 👍",
+    text: "Vient juste d'y passer, très bon accueil, super bonne salade de choux et vraiment pas voleur sur les prix. Je recommande, merci beaucoup ",
     rating: 5,
     role: "Avis Google",
   },

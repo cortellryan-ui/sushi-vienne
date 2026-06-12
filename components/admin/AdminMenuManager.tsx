@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { GripVertical, ImagePlus, Pencil, Plus } from "lucide-react";
-import { MOCK_CATEGORIES, MOCK_PRODUCTS, CATEGORY_EMOJI } from "@/lib/mock-data";
+import { MOCK_CATEGORIES, MOCK_PRODUCTS } from "@/lib/mock-data";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { Button } from "@/components/ui/button";
@@ -55,7 +55,6 @@ export function AdminMenuManager() {
             >
               <header className="flex items-center justify-between gap-2 border-b bg-cream px-4 py-3">
                 <h2 className="flex items-center gap-2 font-display text-lg">
-                  <span>{CATEGORY_EMOJI[cat.id] ?? "🍣"}</span>
                   {cat.name}
                   <span className="text-sm font-normal text-muted-foreground">
                     ({list.length})
@@ -78,8 +77,8 @@ export function AdminMenuManager() {
                     className="flex items-center gap-3 px-4 py-3"
                   >
                     <GripVertical className="size-4 shrink-0 cursor-grab text-neutral-300" />
-                    <div className="grid size-11 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-cream to-muted text-xl">
-                      {CATEGORY_EMOJI[cat.id] ?? "🍣"}
+                    <div className="grid size-11 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-cream to-muted text-muted-foreground">
+                      <ImagePlus className="size-4" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-medium">{p.name}</p>

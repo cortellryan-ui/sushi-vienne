@@ -4,5 +4,18 @@
       "Skill(update-config)",
       "Bash(python3 *)"
     ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git -C \"/Users/taslima/sushi vienne \" push 2>/dev/null || true",
+            "statusMessage": "Push vers GitHub…"
+          }
+        ]
+      }
+    ]
   }
 }

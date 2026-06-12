@@ -1,75 +1,97 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Info } from "lucide-react";
+import { ChevronDown, Info } from "lucide-react";
 import type { Category, Product } from "@/lib/types";
-import { emojiForCategory } from "@/lib/category-emoji";
 import { photoForCategory } from "@/lib/category-photos";
-import { MenuEnergyBackground } from "./MenuEnergyBackground";
 import { ProductCard } from "./ProductCard";
+import { cn } from "@/lib/utils";
 
 type MenuSection = { category: Category; products: Product[] };
 
 export function MenuClient({ menu }: { menu: MenuSection[] }) {
   const t = useTranslations("menu");
+  const [active, setActive] = useState(menu[0]?.category.slug ?? "");
+  const [navOpen, setNavOpen] = useState(false); // dépli mobile
+
+  const current = menu.find((s) => s.category.slug === active) ?? menu[0];
 
   return (
-    <div className="relative">
-      {/* Fond « énergie orange » animé (Canvas 2D, sticky = reste dans le viewport
-          pendant le scroll). En dehors du parent du sticky-nav, sans overflow. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-0 select-none"
-      >
-        <MenuEnergyBackground />
+    <div className="container py-10 md:py-12">
+      {/* Note maquette (discrète) */}
+      <div className="mb-8 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-xs text-muted-foreground">
+        <Info className="size-3.5 shrink-0" />
+        {t("demoNote")}
       </div>
 
-      {/* Navigation par catégories (ancres, collante sous le header) */}
-      <nav className="sticky top-16 z-30 border-y border-white/10 bg-ink/85 backdrop-blur">
-        <div className="container overflow-x-auto py-3">
-          <ul className="flex gap-2">
-            {menu.map(({ category }) => (
-              <li key={category.id}>
-                <a
-                  href={`#${category.slug}`}
-                  className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-medium text-white/80 transition hover:border-brand hover:text-white"
-                >
-                  <span>{emojiForCategory(category.slug)}</span>
-                  {category.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+      <div className="flex flex-col gap-6 md:flex-row md:gap-10">
+        {/* ===== Catégories sur le côté (dépli) ===== */}
+        <aside className="md:w-56 md:shrink-0">
+          {/* Mobile : bouton qui déplie la liste */}
+          <button
+            type="button"
+            onClick={() => setNavOpen((o) => !o)}
+            className="flex w-full items-center justify-between rounded-xl border bg-white px-4 py-3 font-medium shadow-sm md:hidden"
+            aria-expanded={navOpen}
+          >
+            <span>{current?.category.name}</span>
+            <ChevronDown
+              className={cn("size-4 transition", navOpen && "rotate-180")}
+            />
+          </button>
 
-      <div className="container relative z-10 py-12">
-        {/* Note maquette (discrète) */}
-        <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-white/50">
-          <Info className="size-3.5 shrink-0" />
-          {t("demoNote")}
-        </div>
+          <nav
+            className={cn(
+              "mt-2 md:mt-0 md:sticky md:top-24",
+              !navOpen && "hidden md:block",
+            )}
+          >
+            <ul className="space-y-1 rounded-2xl border bg-white p-2 shadow-sm md:border-0 md:bg-transparent md:p-0 md:shadow-none">
+              {menu.map(({ category }) => {
+                const isActive = category.slug === active;
+                return (
+                  <li key={category.id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActive(category.slug);
+                        setNavOpen(false);
+                      }}
+                      className={cn(
+                        "w-full rounded-xl px-4 py-2.5 text-left text-sm font-medium transition",
+                        isActive
+                          ? "bg-brand-gradient text-white shadow-sm shadow-brand/30"
+                          : "text-foreground hover:bg-cream",
+                      )}
+                    >
+                      {category.name}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </aside>
 
-        {/* Sections par catégorie */}
-        <div className="space-y-16">
-          {menu.map(({ category, products }) => (
-            <section key={category.id} id={category.slug} className="scroll-mt-32">
-              <h2 className="mb-6 flex items-center gap-2.5 font-display text-3xl text-white">
-                <span>{emojiForCategory(category.slug)}</span>
-                {category.name}
+        {/* ===== Plats de la catégorie sélectionnée ===== */}
+        <div className="min-w-0 flex-1">
+          {current && (
+            <section>
+              <h2 className="mb-6 font-display text-3xl">
+                {current.category.name}
               </h2>
-              <div className="grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                {products.map((product) => (
+              <div className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-3">
+                {current.products.map((product) => (
                   <ProductCard
                     key={product.id}
                     product={product}
-                    image={photoForCategory(category.slug)}
-                    emoji={emojiForCategory(category.slug)}
+                    image={photoForCategory(current.category.slug)}
                   />
                 ))}
               </div>
             </section>
-          ))}
+          )}
         </div>
       </div>
     </div>

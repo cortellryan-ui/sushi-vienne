@@ -22,8 +22,8 @@ export function Footer() {
         {/* Identité */}
         <div className="md:col-span-1">
           <div className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-gradient text-lg">
-              🍣
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-gradient font-display text-lg font-bold text-white">
+              S
             </span>
             <span className="font-display text-lg tracking-wide">
               SUSHI SMILE

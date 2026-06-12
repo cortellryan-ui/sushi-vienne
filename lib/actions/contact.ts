@@ -24,7 +24,7 @@ export async function sendContactMessage(raw: unknown): Promise<ContactResult> {
       from: EMAIL_FROM,
       to: RESTAURANT_EMAIL,
       replyTo: email,
-      subject: `✉️ Message de ${name} (site Sushi Smile)`,
+      subject: `Message de ${name} (site Sushi Smile)`,
       html: `<div style="font-family:system-ui,sans-serif">
         <p><strong>${name}</strong> &lt;${email}&gt;</p>
         <p style="white-space:pre-wrap">${message}</p>

@@ -21,8 +21,8 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo (placeholder en attendant le logo maki souriant du client) */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-gradient text-lg">
-            🍣
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-gradient font-display text-lg font-bold text-white">
+            S
           </span>
           <span className="font-display text-lg leading-none tracking-wide">
             SUSHI<span className="text-gradient"> SMILE</span>
