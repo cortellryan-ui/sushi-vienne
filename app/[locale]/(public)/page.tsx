@@ -139,7 +139,7 @@ export default function HomePage({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5">
-                  <span className="font-display text-xl text-white drop-shadow md:text-2xl">
+                  <span className="font-serif font-medium text-xl text-white drop-shadow md:text-2xl">
                     {c.label}
                   </span>
                   <span className="grid size-9 place-items-center rounded-full bg-white/20 backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-brand">
@@ -177,7 +177,7 @@ export default function HomePage({
           </Reveal>
 
           <Reveal delay={100}>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">
+            <h2 className="font-serif font-medium text-3xl sm:text-4xl md:text-5xl">
               {t("ambianceTitle")}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
@@ -212,7 +212,7 @@ export default function HomePage({
         <div className="container py-12">
           <div className="flex flex-col items-center justify-between gap-4 rounded-3xl bg-ink px-8 py-8 text-center text-white sm:flex-row sm:text-left">
             <div>
-              <h2 className="font-display text-2xl">{t("uberTitle")}</h2>
+              <h2 className="font-serif font-medium text-2xl">{t("uberTitle")}</h2>
               <p className="mt-1 text-sm text-white/60">{t("uberText")}</p>
             </div>
             <Button asChild size="lg">

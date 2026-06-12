@@ -39,7 +39,7 @@ export function CustomerReviews({
           <span className="inline-flex rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
             {kicker}
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-serif font-medium text-3xl sm:text-4xl md:text-5xl">
             {title}
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">

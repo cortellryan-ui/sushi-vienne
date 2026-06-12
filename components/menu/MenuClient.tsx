@@ -80,7 +80,7 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
         <div className="min-w-0 flex-1">
           {current && (
             <section>
-              <h2 className="mb-6 font-display text-3xl">
+              <h2 className="mb-6 font-serif font-medium text-3xl">
                 {current.category.name}
               </h2>
               <div className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-3">

@@ -80,7 +80,7 @@ export function PromoBanner({ badge, title, cta, features }: PromoBannerProps) {
               {badge}
             </span>
 
-            <h2 className="mt-6 max-w-2xl cursor-default font-display text-4xl leading-[1.05] transition-[text-shadow,transform] duration-300 hover:scale-[1.01] hover:[text-shadow:0_0_30px_rgba(242,101,34,0.9)] sm:text-5xl md:text-6xl">
+            <h2 className="mt-6 max-w-2xl cursor-default font-serif font-medium text-4xl leading-[1.05] transition-[text-shadow,transform] duration-300 hover:scale-[1.01] hover:[text-shadow:0_0_30px_rgba(242,101,34,0.9)] sm:text-5xl md:text-6xl">
               {title}
             </h2>
 

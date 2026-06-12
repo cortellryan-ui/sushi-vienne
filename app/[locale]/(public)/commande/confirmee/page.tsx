@@ -26,7 +26,7 @@ export default async function ConfirmeePage({
         <div className="max-w-md">
           <ClearCartOnMount />
           <CheckCircle2 className="mx-auto size-16 text-emerald-500" />
-          <h1 className="mt-4 font-display text-3xl">Paiement autorisé</h1>
+          <h1 className="mt-4 font-serif font-medium text-3xl">Paiement autorisé</h1>
           <p className="mt-3 inline-block rounded-full bg-ink px-4 py-1.5 font-display text-lg text-white">
             Commande n° {result.orderNumber}
           </p>
@@ -42,7 +42,7 @@ export default async function ConfirmeePage({
       ) : (
         <div className="max-w-md">
           <XCircle className="mx-auto size-16 text-red-500" />
-          <h1 className="mt-4 font-display text-3xl">Paiement non confirmé</h1>
+          <h1 className="mt-4 font-serif font-medium text-3xl">Paiement non confirmé</h1>
           <p className="mx-auto mt-4 max-w-sm text-muted-foreground">
             Le paiement n’a pas pu être confirmé. Vous n’avez pas été débité.
             Réessayez ou choisissez « payer sur place ».

@@ -53,7 +53,7 @@ export function ZinouButcher() {
               {t("kicker")}
             </span>
 
-            <h2 className="mt-5 font-display text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
+            <h2 className="mt-5 font-serif font-medium text-3xl leading-[1.1] sm:text-4xl md:text-5xl">
               {t("title")}
             </h2>
 

@@ -19,7 +19,7 @@ export default function InfosPage({
   return (
     <div className="container py-16">
       <header className="mb-12 text-center">
-        <h1 className="font-display text-4xl sm:text-5xl">{t("title")}</h1>
+        <h1 className="font-serif font-medium text-4xl sm:text-5xl">{t("title")}</h1>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
           {t("subtitle")}
         </p>
@@ -29,7 +29,7 @@ export default function InfosPage({
         {/* Colonne infos */}
         <div className="space-y-6">
           <section className="rounded-2xl border bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 font-display text-xl">
+            <h2 className="mb-4 flex items-center gap-2 font-serif font-medium text-xl">
               <Clock className="size-5 text-brand" /> {t("hoursTitle")}
             </h2>
             <OpenStatusBadge className="mb-4 bg-ink/5 !text-foreground" />
@@ -37,14 +37,14 @@ export default function InfosPage({
           </section>
 
           <section className="rounded-2xl border bg-white p-6">
-            <h2 className="mb-3 flex items-center gap-2 font-display text-xl">
+            <h2 className="mb-3 flex items-center gap-2 font-serif font-medium text-xl">
               <MapPin className="size-5 text-brand" /> {t("addressTitle")}
             </h2>
             <p className="text-sm">{RESTAURANT.address.full}</p>
           </section>
 
           <section className="rounded-2xl border bg-white p-6">
-            <h2 className="mb-3 flex items-center gap-2 font-display text-xl">
+            <h2 className="mb-3 flex items-center gap-2 font-serif font-medium text-xl">
               <Phone className="size-5 text-brand" /> {t("phoneTitle")}
             </h2>
             <a
@@ -81,7 +81,7 @@ export default function InfosPage({
 
           {/* Formulaire de contact (Resend) */}
           <section className="rounded-2xl border bg-white p-6">
-            <h2 className="mb-3 font-display text-xl">{t("contactTitle")}</h2>
+            <h2 className="mb-3 font-serif font-medium text-xl">{t("contactTitle")}</h2>
             <ContactForm />
           </section>
         </div>
@@ -92,7 +92,7 @@ export default function InfosPage({
         <div className="grid md:grid-cols-3">
           <div className="bg-brand-gradient p-6 text-white md:p-8">
             <Handshake className="size-8" />
-            <h2 className="mt-3 font-display text-2xl">{t("partnerTitle")}</h2>
+            <h2 className="mt-3 font-serif font-medium text-2xl">{t("partnerTitle")}</h2>
             <p className="mt-2 text-sm leading-relaxed text-white/85">
               {t("partnerText")}
             </p>

@@ -53,7 +53,7 @@ function Highlight({
           className="object-cover transition duration-500 group-hover:scale-105"
         />
       </div>
-      <h3 className="mt-5 font-display text-xl">{title}</h3>
+      <h3 className="mt-5 font-serif font-medium text-xl">{title}</h3>
       <p
         className={cn(
           "mt-2 leading-relaxed text-muted-foreground",

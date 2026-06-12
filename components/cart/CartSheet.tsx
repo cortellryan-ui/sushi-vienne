@@ -206,7 +206,7 @@ export function CartSheet() {
                     <span className="text-muted-foreground">
                       {tCart("total")}
                     </span>
-                    <span className="font-display text-2xl">
+                    <span className="font-serif font-medium text-2xl">
                       {formatPrice(total, locale)}
                     </span>
                   </div>
@@ -360,7 +360,7 @@ export function CartSheet() {
             <SheetFooter>
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-muted-foreground">{tCart("total")}</span>
-                <span className="font-display text-2xl">
+                <span className="font-serif font-medium text-2xl">
                   {formatPrice(total, locale)}
                 </span>
               </div>
@@ -384,7 +384,7 @@ export function CartSheet() {
         {step === "confirmation" && order && (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
             <CheckCircle2 className="size-16 text-emerald-500" />
-            <h2 className="font-display text-2xl">{tConfirm("title")}</h2>
+            <h2 className="font-serif font-medium text-2xl">{tConfirm("title")}</h2>
             <p className="rounded-full bg-ink px-4 py-1.5 font-display text-lg text-white">
               {tConfirm("orderNumber", { number: order.number })}
             </p>

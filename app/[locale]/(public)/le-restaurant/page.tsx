@@ -21,7 +21,7 @@ export default function RestaurantPage({
       {/* En-tête — grand titre orange animé (fond homogène, sans lueur) */}
       <header className="container pt-16 text-center md:pt-24">
         <Reveal>
-          <h1 className="animate-shimmer bg-gradient-to-r from-brand via-brand-deep to-brand bg-[length:200%_auto] bg-clip-text py-2 font-display text-6xl leading-[1.02] tracking-tight text-transparent sm:text-7xl md:text-8xl">
+          <h1 className="animate-shimmer bg-gradient-to-r from-brand via-brand-deep to-brand bg-[length:200%_auto] bg-clip-text py-2 font-serif font-medium text-6xl leading-[1.02] tracking-tight text-transparent sm:text-7xl md:text-8xl">
             {t("title")}
           </h1>
         </Reveal>
@@ -38,7 +38,7 @@ export default function RestaurantPage({
           <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
             Restaurant japonais · Depuis 2018
           </span>
-          <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl leading-tight sm:text-4xl md:text-5xl">
+          <h2 className="mx-auto mt-5 max-w-3xl font-serif font-medium text-3xl leading-tight sm:text-4xl md:text-5xl">
             Une cuisine japonaise faite maison, au cœur de Vienne
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
@@ -91,7 +91,7 @@ export default function RestaurantPage({
             className="pointer-events-none absolute -bottom-24 -right-16 size-72 rounded-full bg-brand-deep/30 blur-[100px]"
           />
           <div className="relative">
-            <h2 className="font-display text-3xl sm:text-4xl">
+            <h2 className="font-serif font-medium text-3xl sm:text-4xl">
               Une envie ? Commandez en quelques clics.
             </h2>
             <p className="mx-auto mt-3 max-w-md text-white/70">
