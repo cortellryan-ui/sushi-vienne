@@ -11,6 +11,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
+import { useOpeningHours } from "@/components/site/OpeningHoursProvider";
 import { createOrder } from "@/lib/actions/orders";
 import { createOnlineCheckout } from "@/lib/actions/checkout";
 import { formatPrice } from "@/lib/format";
@@ -57,11 +58,12 @@ export function CartSheet() {
     null,
   );
 
-  // Créneaux valides — calculés côté client (dépend de l'heure courante).
+  // Créneaux valides — calculés côté client (heure courante + horaires DB).
+  const hours = useOpeningHours();
   const [slots, setSlots] = useState<PickupSlot[]>([]);
   useEffect(() => {
-    if (isOpen) setSlots(generatePickupSlots());
-  }, [isOpen]);
+    if (isOpen) setSlots(generatePickupSlots({ slots: hours }));
+  }, [isOpen, hours]);
 
   // Réinitialise l'étape à la fermeture.
   useEffect(() => {

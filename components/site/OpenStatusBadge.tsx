@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { isOpenNow } from "@/lib/opening-hours";
+import { useOpeningHours } from "./OpeningHoursProvider";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,14 +13,15 @@ import { cn } from "@/lib/utils";
  */
 export function OpenStatusBadge({ className }: { className?: string }) {
   const t = useTranslations("status");
+  const hours = useOpeningHours();
   const [open, setOpen] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const update = () => setOpen(isOpenNow());
+    const update = () => setOpen(isOpenNow(hours));
     update();
     const id = setInterval(update, 60_000);
     return () => clearInterval(id);
-  }, []);
+  }, [hours]);
 
   return (
     <span

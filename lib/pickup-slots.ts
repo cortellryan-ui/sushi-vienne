@@ -1,4 +1,4 @@
-import { OPENING_HOURS, type OpeningSlot } from "./opening-hours";
+import { OPENING_HOURS, isOpenNow, type OpeningSlot } from "./opening-hours";
 import { PREP_DELAY_MINUTES } from "./restaurant";
 
 /**
@@ -82,4 +82,29 @@ export function generatePickupSlots(opts?: {
   }
 
   return out;
+}
+
+/**
+ * Validation SERVEUR d'un créneau de retrait choisi (défense contre un appel
+ * direct aux Server Actions qui contournerait le sélecteur du navigateur).
+ * Un créneau est valide s'il : n'est pas dans le passé (tolérance de soumission),
+ * n'est pas trop lointain, et tombe dans une plage d'ouverture (Europe/Paris).
+ */
+export function isValidPickupTime(
+  iso: string,
+  opts?: { now?: Date; slots?: OpeningSlot[]; maxDays?: number },
+): boolean {
+  const pickup = new Date(iso);
+  if (Number.isNaN(pickup.getTime())) return false;
+
+  const now = opts?.now ?? new Date();
+  const slots = opts?.slots ?? OPENING_HOURS;
+  const maxDays = opts?.maxDays ?? 8;
+
+  // Pas dans le passé (2 min de tolérance pour la latence de remplissage/soumission).
+  if (pickup.getTime() < now.getTime() - 2 * 60_000) return false;
+  // Pas trop loin dans le futur.
+  if (pickup.getTime() > now.getTime() + maxDays * 24 * 60 * 60_000) return false;
+  // Doit tomber dans une plage d'ouverture du restaurant (fuseau Europe/Paris).
+  return isOpenNow(slots, pickup);
 }

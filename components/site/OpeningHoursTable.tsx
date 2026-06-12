@@ -1,5 +1,8 @@
+"use client";
+
 import { useLocale, useTranslations } from "next-intl";
-import { OPENING_HOURS, slotsForDay } from "@/lib/opening-hours";
+import { slotsForDay } from "@/lib/opening-hours";
+import { useOpeningHours } from "./OpeningHoursProvider";
 import { cn } from "@/lib/utils";
 
 // Ordre d'affichage : lundi → dimanche (les dayOfWeek suivent Date.getDay, 0 = dimanche).
@@ -17,16 +20,17 @@ function fmt(hhmm: string, locale: string) {
   return locale === "fr" ? hhmm.replace(":", "h") : hhmm;
 }
 
-/** Tableau des horaires d'ouverture, lu depuis la config (future table `opening_hours`). */
+/** Tableau des horaires d'ouverture, lus depuis la table Supabase `opening_hours`. */
 export function OpeningHoursTable({ className }: { className?: string }) {
   const tDays = useTranslations("days");
   const tCommon = useTranslations("common");
   const locale = useLocale();
+  const hours = useOpeningHours();
 
   return (
     <dl className={cn("space-y-1.5 text-sm", className)}>
       {DISPLAY_ORDER.map(({ day, key }) => {
-        const slots = slotsForDay(day, OPENING_HOURS);
+        const slots = slotsForDay(day, hours);
         return (
           <div key={key} className="flex items-baseline justify-between gap-4">
             <dt className="text-muted-foreground">{tDays(key)}</dt>

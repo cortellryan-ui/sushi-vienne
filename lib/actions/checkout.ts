@@ -2,6 +2,8 @@
 
 import { createAdminClient } from "@/lib/supabase/server";
 import { getStripe } from "@/lib/stripe/server";
+import { getOpeningHours } from "@/lib/data/opening-hours";
+import { isValidPickupTime } from "@/lib/pickup-slots";
 import {
   CreateOrderSchema,
   buildOrderLines,
@@ -10,7 +12,7 @@ import {
 
 export type CheckoutResult =
   | { ok: true; url: string }
-  | { ok: false; error: "invalid" | "unavailable" | "stripe" };
+  | { ok: false; error: "invalid" | "unavailable" | "slot" | "stripe" };
 
 /**
  * Crée une session Stripe Checkout (capture manuelle = autorisation) et renvoie
@@ -23,6 +25,12 @@ export async function createOnlineCheckout(
   const parsed = CreateOrderSchema.safeParse(raw);
   if (!parsed.success) return { ok: false, error: "invalid" };
   const input = parsed.data;
+
+  // Le créneau choisi doit être valide (ouverture + pas dans le passé) côté serveur.
+  const hours = await getOpeningHours();
+  if (!isValidPickupTime(input.pickupTime, { slots: hours })) {
+    return { ok: false, error: "slot" };
+  }
 
   const stripe = getStripe();
   if (!stripe) return { ok: false, error: "stripe" };
