@@ -16,7 +16,6 @@ import { RESTAURANT } from "@/lib/restaurant";
 
 const HERO_IMG = "/photos/hero-flamme.jpg";
 const HERO_VIDEO = "/videos/hero.mp4";
-const PROMO_IMG = "/photos/plats/plat-60.jpg";
 
 // Vitrine catégories (photos sans branding visible).
 const CATEGORIES = [
@@ -110,7 +109,6 @@ export default function HomePage({
 
       {/* ===== BANDEAU PROMO ===== */}
       <PromoBanner
-        img={PROMO_IMG}
         badge={t("promoBadge")}
         title={t("promoTitle")}
         cta={t("promoCta")}
