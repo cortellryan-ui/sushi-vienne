@@ -75,7 +75,9 @@ function reducer(state: State, action: Action): State {
         items: state.items.filter((i) => i.productId !== action.productId),
       };
     case "CLEAR":
-      return { items: [] };
+      // Idempotent : panier déjà vide → on garde la même référence de state
+      // (évite un re-render inutile et toute boucle d'effet sur `clear`).
+      return state.items.length === 0 ? state : { items: [] };
     default:
       return state;
   }
@@ -119,26 +121,30 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [state.items]);
 
-  const value = useMemo<CartContextValue>(() => {
-    const count = state.items.reduce((n, i) => n + i.quantity, 0);
-    const total = state.items.reduce((s, i) => s + i.quantity * i.unitPrice, 0);
-    return {
-      items: state.items,
-      count,
-      total,
-      isOpen,
+  // Callbacks à identité STABLE : `dispatch` et `setIsOpen` ne changent jamais,
+  // donc ces fonctions non plus. Indispensable pour les consommateurs qui les
+  // mettent en dépendance d'un useEffect (ex. ClearCartOnMount) — sinon boucle.
+  const actions = useMemo(
+    () => ({
       open: () => setIsOpen(true),
       close: () => setIsOpen(false),
-      add: (product) => {
+      add: (product: Product) => {
         dispatch({ type: "ADD", product });
         setIsOpen(true);
       },
-      inc: (productId) => dispatch({ type: "INC", productId }),
-      dec: (productId) => dispatch({ type: "DEC", productId }),
-      remove: (productId) => dispatch({ type: "REMOVE", productId }),
+      inc: (productId: string) => dispatch({ type: "INC", productId }),
+      dec: (productId: string) => dispatch({ type: "DEC", productId }),
+      remove: (productId: string) => dispatch({ type: "REMOVE", productId }),
       clear: () => dispatch({ type: "CLEAR" }),
-    };
-  }, [state.items, isOpen]);
+    }),
+    [],
+  );
+
+  const value = useMemo<CartContextValue>(() => {
+    const count = state.items.reduce((n, i) => n + i.quantity, 0);
+    const total = state.items.reduce((s, i) => s + i.quantity * i.unitPrice, 0);
+    return { items: state.items, count, total, isOpen, ...actions };
+  }, [state.items, isOpen, actions]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
