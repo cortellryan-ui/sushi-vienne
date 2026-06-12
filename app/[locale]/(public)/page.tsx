@@ -17,13 +17,13 @@ import { RESTAURANT } from "@/lib/restaurant";
 const HERO_IMG = "/photos/hero-flamme.jpg";
 const HERO_VIDEO = "/videos/hero.mp4";
 
-// Vitrine catégories (photos sans branding visible).
+// Vitrine catégories (photos propres, cohérentes avec le nom, sans carte de visite).
 const CATEGORIES = [
-  { label: "Plateaux", img: "/photos/plats/plat-100.jpg", big: true },
+  { label: "Plateaux", img: "/photos/plats/plat-100.jpg" },
   { label: "California", img: "/photos/plats/plat-84.jpg" },
+  { label: "Makis", img: "/photos/plats/plat-118.jpg" },
   { label: "Sashimi", img: "/photos/plats/plat-187.jpg" },
-  { label: "Makis", img: "/photos/plats/plat-60.jpg" },
-  { label: "Croustillants", img: "/photos/plats/plat-157.jpg" },
+  { label: "Croustillants", img: "/photos/plats/plat-82.jpg" },
   { label: "Desserts", img: "/photos/plats/plat-200.jpg" },
 ];
 
@@ -126,30 +126,26 @@ export default function HomePage({
           </p>
         </Reveal>
 
-        <div className="grid auto-rows-[150px] grid-cols-2 gap-3 md:auto-rows-[210px] md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5">
           {CATEGORIES.map((c, i) => (
-            <Reveal
-              key={c.label}
-              delay={i * 70}
-              className={c.big ? "col-span-2 row-span-2" : ""}
-            >
+            <Reveal key={c.label} delay={i * 80}>
               <Link
                 href="/menu"
-                className="group relative block h-full overflow-hidden rounded-3xl"
+                className="group relative block aspect-[4/5] overflow-hidden rounded-3xl ring-1 ring-black/5 shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-xl"
               >
                 <Image
                   src={c.img}
                   alt={c.label}
                   fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-4 md:p-5">
-                  <span className="font-display text-lg text-white md:text-2xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5">
+                  <span className="font-display text-xl text-white drop-shadow md:text-2xl">
                     {c.label}
                   </span>
-                  <span className="grid size-8 place-items-center rounded-full bg-white/20 opacity-0 backdrop-blur transition group-hover:opacity-100">
+                  <span className="grid size-9 place-items-center rounded-full bg-white/20 backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-brand">
                     <ArrowRight className="size-4 text-white" />
                   </span>
                 </div>
