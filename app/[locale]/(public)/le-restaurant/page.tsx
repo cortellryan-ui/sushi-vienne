@@ -5,7 +5,7 @@ import { ArrowRight, ChefHat, Clock, Leaf, MapPin, ShoppingBag } from "lucide-re
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
-import { RestaurantVideos } from "@/components/site/RestaurantVideos";
+import { AmbianceVideo } from "@/components/site/AmbianceVideo";
 import { cn } from "@/lib/utils";
 
 const FEATURES = [
@@ -45,9 +45,9 @@ export default function RestaurantPage({
         </p>
       </Reveal>
 
-      {/* Vidéos d'ambiance (photos animées) */}
+      {/* Vidéo d'ambiance (parallaxe au scroll) */}
       <div className="my-12 md:my-16">
-        <RestaurantVideos />
+        <AmbianceVideo />
       </div>
 
       {/* Intro éditoriale (image + texte + points forts) */}
