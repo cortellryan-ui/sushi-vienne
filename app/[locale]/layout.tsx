@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Bricolage_Grotesque, Fraunces, Inter } from "next/font/google";
 import { routing } from "@/i18n/routing";
@@ -28,29 +28,37 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
-  title: "Sushi Smile — Sushi à emporter à Vienne",
-  description:
-    "Sushi frais à emporter à Vienne (38200). Commandez en ligne, retrait au comptoir, paiement sur place. Aussi sur Uber Eats.",
-  openGraph: {
-    title: "Sushi Smile — Sushi à emporter à Vienne",
-    description:
-      "Sushi frais à emporter à Vienne (38200). Commandez en ligne, retrait au comptoir, paiement sur place. Aussi sur Uber Eats.",
-    type: "website",
-    locale: "fr_FR",
-    images: [
-      {
-        url: "/photos/hero-flamme.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Sushi Smile — sushis à emporter à Vienne",
-      },
-    ],
-  },
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("title");
+  const description = t("description");
+
+  return {
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    ),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: locale === "en" ? "en_US" : "fr_FR",
+      images: [
+        {
+          url: "/photos/hero-flamme.jpg",
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
