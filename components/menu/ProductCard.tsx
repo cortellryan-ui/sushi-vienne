@@ -12,9 +12,11 @@ import { cn } from "@/lib/utils";
 export function ProductCard({
   product,
   image,
+  special = false,
 }: {
   product: Product;
   image: string | null;
+  special?: boolean;
 }) {
   const t = useTranslations("menu");
   const locale = useLocale();
@@ -35,6 +37,7 @@ export function ProductCard({
         className={cn(
           "relative block aspect-square w-full overflow-hidden rounded-xl bg-[#f4efe6]",
           available ? "cursor-pointer" : "cursor-not-allowed",
+          special && "ring-2 ring-brand-deep ring-offset-2 ring-offset-cream",
         )}
       >
         {src ? (
@@ -60,6 +63,12 @@ export function ProductCard({
           </span>
         )}
 
+        {special && (
+          <span className="absolute right-2 top-2 z-10 rounded-full bg-brand-deep px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm">
+            Spécialité
+          </span>
+        )}
+
         {available ? (
           <span className="pointer-events-none absolute inset-0 grid place-items-center">
             <span className="translate-y-1 rounded-full bg-ink px-5 py-2 text-sm font-semibold text-white opacity-100 transition group-hover:translate-y-0 md:opacity-0 md:group-hover:opacity-100">
@@ -79,7 +88,12 @@ export function ProductCard({
       <div className="mt-3">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-semibold leading-tight">{product.name}</h3>
-          <span className="shrink-0 font-display text-lg">
+          <span
+            className={cn(
+              "shrink-0 font-display text-lg",
+              special && "text-brand-deep",
+            )}
+          >
             {formatPrice(product.price, locale)}
           </span>
         </div>

@@ -62,7 +62,9 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
                         "w-full rounded-xl px-4 py-2.5 text-left text-sm font-medium transition",
                         isActive
                           ? "bg-brand-gradient text-white shadow-sm shadow-brand/30"
-                          : "text-foreground hover:bg-cream",
+                          : category.slug === "specialites"
+                            ? "text-brand-deep hover:bg-cream"
+                            : "text-foreground hover:bg-cream",
                       )}
                     >
                       {category.name}
@@ -87,6 +89,7 @@ export function MenuClient({ menu }: { menu: MenuSection[] }) {
                     key={product.id}
                     product={product}
                     image={photoForCategory(current.category.slug)}
+                    special={current.category.slug === "specialites"}
                   />
                 ))}
               </div>
