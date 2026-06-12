@@ -138,7 +138,18 @@
     "contactSend": "Send",
     "contactSending": "Sending…",
     "contactSuccess": "Thanks! Your message has been sent.",
-    "contactError": "Sending failed. Please try again or call us."
+    "contactError": "Sending failed. Please try again or call us.",
+    "partnerTitle": "Partnership request",
+    "partnerText": "Are you a business, a shop, an event organiser or a supplier? Let's work together.",
+    "partnerName": "Name",
+    "partnerCompany": "Company / organisation (optional)",
+    "partnerEmail": "Email",
+    "partnerMessage": "Your project",
+    "partnerPlaceholder": "Describe your partnership request…",
+    "partnerSend": "Send request",
+    "partnerSending": "Sending…",
+    "partnerSuccess": "Thanks! Your partnership request has been sent.",
+    "partnerError": "Sending failed. Please try again or call us."
   },
   "days": {
     "monday": "Monday",

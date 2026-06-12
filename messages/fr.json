@@ -138,7 +138,18 @@
     "contactSend": "Envoyer",
     "contactSending": "Envoi…",
     "contactSuccess": "Merci ! Votre message a bien été envoyé.",
-    "contactError": "L'envoi a échoué. Réessayez ou appelez-nous."
+    "contactError": "L'envoi a échoué. Réessayez ou appelez-nous.",
+    "partnerTitle": "Demande de partenariat",
+    "partnerText": "Vous êtes une entreprise, un commerce, un organisateur d'événement ou un fournisseur ? Travaillons ensemble.",
+    "partnerName": "Nom",
+    "partnerCompany": "Société / structure (optionnel)",
+    "partnerEmail": "Email",
+    "partnerMessage": "Votre projet",
+    "partnerPlaceholder": "Décrivez votre demande de partenariat…",
+    "partnerSend": "Envoyer la demande",
+    "partnerSending": "Envoi…",
+    "partnerSuccess": "Merci ! Votre demande de partenariat a bien été envoyée.",
+    "partnerError": "L'envoi a échoué. Réessayez ou appelez-nous."
   },
   "days": {
     "monday": "Lundi",

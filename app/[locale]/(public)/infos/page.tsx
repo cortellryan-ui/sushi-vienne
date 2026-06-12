@@ -1,10 +1,11 @@
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Clock, ExternalLink, MapPin, Phone } from "lucide-react";
+import { Clock, ExternalLink, Handshake, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OpenStatusBadge } from "@/components/site/OpenStatusBadge";
 import { OpeningHoursTable } from "@/components/site/OpeningHoursTable";
 import { ContactForm } from "@/components/site/ContactForm";
+import { PartnershipForm } from "@/components/site/PartnershipForm";
 import { RESTAURANT } from "@/lib/restaurant";
 
 export default function InfosPage({
@@ -85,6 +86,22 @@ export default function InfosPage({
           </section>
         </div>
       </div>
+
+      {/* Demande de partenariat */}
+      <section className="mt-8 overflow-hidden rounded-2xl border bg-white">
+        <div className="grid md:grid-cols-3">
+          <div className="bg-brand-gradient p-6 text-white md:p-8">
+            <Handshake className="size-8" />
+            <h2 className="mt-3 font-display text-2xl">{t("partnerTitle")}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-white/85">
+              {t("partnerText")}
+            </p>
+          </div>
+          <div className="p-6 md:col-span-2 md:p-8">
+            <PartnershipForm />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
