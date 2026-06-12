@@ -12,12 +12,10 @@ export default async function MenuPage({
   const menu = await getMenu();
 
   return (
-    <div className="container py-10 md:py-14">
-      <header className="mb-8 text-center">
+    <div className="bg-ink text-white">
+      <header className="container pt-12 pb-2 text-center md:pt-16">
         <h1 className="font-display text-4xl sm:text-5xl">{t("title")}</h1>
-        <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          {t("subtitle")}
-        </p>
+        <p className="mx-auto mt-3 max-w-xl text-white/60">{t("subtitle")}</p>
       </header>
 
       <MenuClient menu={menu} />
