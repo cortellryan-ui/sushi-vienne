@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Info } from "lucide-react";
 import type { Category, Product } from "@/lib/types";
@@ -12,17 +13,39 @@ type MenuSection = { category: Category; products: Product[] };
 export function MenuClient({ menu }: { menu: MenuSection[] }) {
   const t = useTranslations("menu");
 
+  // Parallaxe : le calque néon glisse plus lentement que le contenu au scroll.
+  const glowRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const el = glowRef.current;
+        if (el) el.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <div className="relative">
-      {/* Halos décoratifs (lueur orange premium) */}
+      {/* Fond néon orange : halos qui dérivent (animation) + parallaxe au scroll.
+          overflow-hidden ici (et pas sur le parent) pour ne pas casser le sticky. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-0 top-40 -z-0 size-[30rem] rounded-full bg-brand/15 blur-[140px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-[60rem] -z-0 size-[28rem] rounded-full bg-brand-deep/15 blur-[140px]"
-      />
+        className="pointer-events-none absolute inset-0 -z-0 overflow-hidden"
+      >
+        <div ref={glowRef} className="absolute inset-0 will-change-transform">
+          <div className="absolute left-[4%] top-[8%] size-[26rem] rounded-full bg-brand/30 blur-[120px] animate-neon-1" />
+          <div className="absolute right-[6%] top-[42%] size-[32rem] rounded-full bg-brand-deep/30 blur-[130px] animate-neon-2" />
+          <div className="absolute left-[38%] top-[72%] size-[24rem] rounded-full bg-brand/25 blur-[120px] animate-neon-pulse" />
+          <div className="absolute right-[30%] top-[96%] size-[22rem] rounded-full bg-brand/20 blur-[110px] animate-neon-1" />
+        </div>
+      </div>
 
       {/* Navigation par catégories (ancres, collante sous le header) */}
       <nav className="sticky top-16 z-30 border-y border-white/10 bg-ink/85 backdrop-blur">
