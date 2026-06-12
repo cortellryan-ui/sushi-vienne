@@ -11,6 +11,21 @@ export function AmbianceVideo() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Autoplay mobile fiable (propriété muted forcée + play explicite).
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.defaultMuted = true;
+    const tryPlay = () => {
+      const p = vid.play();
+      if (p) p.catch(() => {});
+    };
+    tryPlay();
+    vid.addEventListener("canplay", tryPlay);
+    return () => vid.removeEventListener("canplay", tryPlay);
+  }, []);
+
   useEffect(() => {
     let raf = 0;
     const update = () => {

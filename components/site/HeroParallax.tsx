@@ -22,6 +22,33 @@ export function HeroParallax({
   video?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Autoplay mobile fiable : iOS/Safari exigent la *propriété* `muted` (l'attribut
+  // JSX ne suffit pas avec React) puis un play() explicite. Repli si le navigateur
+  // traîne (canplay) ou bloque jusqu'à la 1re interaction.
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.defaultMuted = true;
+
+    const tryPlay = () => {
+      const p = vid.play();
+      if (p) p.catch(() => {});
+    };
+    tryPlay();
+    vid.addEventListener("canplay", tryPlay);
+    const onInteract = () => tryPlay();
+    window.addEventListener("touchstart", onInteract, { passive: true, once: true });
+    window.addEventListener("scroll", onInteract, { passive: true, once: true });
+
+    return () => {
+      vid.removeEventListener("canplay", tryPlay);
+      window.removeEventListener("touchstart", onInteract);
+      window.removeEventListener("scroll", onInteract);
+    };
+  }, [video]);
 
   useEffect(() => {
     const el = ref.current;
@@ -53,12 +80,14 @@ export function HeroParallax({
     >
       {video ? (
         <video
+          ref={videoRef}
           src={video}
           poster={src}
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           aria-label={alt}
           className="animate-kenburns size-full object-cover"
         />
