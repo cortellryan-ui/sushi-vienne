@@ -24,14 +24,19 @@ export async function sendOrderNotification(
   const resend = getResend();
   if (!resend || !RESTAURANT_EMAIL) return false;
 
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const acceptUrl = `${base}/api/orders/${order.id}/accept?token=${order.validationToken}`;
   const declineUrl = `${base}/api/orders/${order.id}/decline?token=${order.validationToken}`;
 
+  // Heure de retrait TOUJOURS affichée en fuseau du restaurant (le runtime
+  // Vercel est en UTC : sans timeZone, l'heure serait décalée).
   const pickup = new Date(order.pickupTime).toLocaleString("fr-FR", {
     weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Europe/Paris",
   });
 
   const rows = order.items

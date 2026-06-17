@@ -10,7 +10,7 @@ import {
 } from "react";
 import type { CartItem, Product } from "./types";
 
-const STORAGE_KEY = "sushi-vienne-cart";
+export const STORAGE_KEY = "sushi-vienne-cart";
 
 type State = { items: CartItem[] };
 

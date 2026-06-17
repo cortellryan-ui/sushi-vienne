@@ -197,7 +197,9 @@
     "contact": "Contact",
     "navigation": "Navigation",
     "rights": "All rights reserved.",
-    "madeBy": "Website by Velios AI."
+    "madeBy": "Website by Velios AI.",
+    "legal": "Legal notice",
+    "privacy": "Privacy"
   },
   "common": {
     "closed": "Closed"

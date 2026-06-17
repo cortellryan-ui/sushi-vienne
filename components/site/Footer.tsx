@@ -81,7 +81,15 @@ export function Footer() {
           <p>
             © {year} {RESTAURANT.name}. {t("footer.rights")}
           </p>
-          <p>{t("footer.madeBy")}</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <Link href="/mentions-legales" className="hover:text-white">
+              {t("footer.legal")}
+            </Link>
+            <Link href="/confidentialite" className="hover:text-white">
+              {t("footer.privacy")}
+            </Link>
+            <span>{t("footer.madeBy")}</span>
+          </div>
         </div>
       </div>
     </footer>

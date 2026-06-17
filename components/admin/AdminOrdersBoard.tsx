@@ -31,13 +31,10 @@ const COLUMNS: { key: OrderStatus; title: string; accent: string }[] = [
   { key: "terminee", title: "Terminées", accent: "text-neutral-500" },
 ];
 
-function beep() {
+/** Émet un bip court sur un AudioContext partagé (réutilisé, jamais recréé). */
+function beep(ctx: AudioContext | null) {
+  if (!ctx) return;
   try {
-    const Ctx =
-      window.AudioContext ||
-      (window as unknown as { webkitAudioContext: typeof AudioContext })
-        .webkitAudioContext;
-    const ctx = new Ctx();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.connect(gain);
@@ -97,6 +94,36 @@ export function AdminOrdersBoard({
   const soundRef = useRef(soundOn);
   soundRef.current = soundOn;
 
+  // AudioContext UNIQUE, réutilisé pour tous les bips (évite la fuite de
+  // contextes qui finit par couper le son après quelques commandes).
+  const audioRef = useRef<AudioContext | null>(null);
+  // « Dernier gagne » : ignore une réponse de refresh arrivée dans le désordre.
+  const refreshSeq = useRef(0);
+
+  function ensureAudio() {
+    try {
+      if (!audioRef.current) {
+        const Ctx =
+          window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext })
+            .webkitAudioContext;
+        audioRef.current = new Ctx();
+      }
+      // Débloque le contexte (autoplay policy) — appelé depuis un geste utilisateur.
+      if (audioRef.current.state === "suspended") void audioRef.current.resume();
+    } catch {
+      /* audio indisponible */
+    }
+    return audioRef.current;
+  }
+
+  function refresh() {
+    const seq = ++refreshSeq.current;
+    refreshAdminOrders().then((list) => {
+      if (seq === refreshSeq.current) setOrders(list);
+    });
+  }
+
   // Abonnement Realtime : à chaque changement sur `orders`, on re-fetch.
   useEffect(() => {
     const supabase = createClient();
@@ -106,26 +133,32 @@ export function AdminOrdersBoard({
         "postgres_changes",
         { event: "*", schema: "public", table: "orders" },
         (payload) => {
-          refreshAdminOrders().then(setOrders);
+          refresh();
           if (
             payload.eventType === "INSERT" &&
             (payload.new as { status?: string }).status === "en_attente" &&
             soundRef.current
           ) {
-            beep();
+            beep(audioRef.current);
           }
         },
       )
       .subscribe();
     return () => {
       supabase.removeChannel(channel);
+      audioRef.current?.close().catch(() => {});
+      audioRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function setStatus(id: string, status: OrderStatus) {
     // Optimiste : on met à jour localement, le Realtime confirmera.
     setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
-    await updateOrderStatus(id, status);
+    const res = await updateOrderStatus(id, status);
+    // Échec (session expirée, transition refusée…) : aucune écriture DB, donc
+    // aucun événement Realtime ne corrigera l'UI → on resynchronise.
+    if (!res.ok) refresh();
   }
 
   async function logout() {
@@ -152,7 +185,10 @@ export function AdminOrdersBoard({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setSoundOn((s) => !s)}
+            onClick={() => {
+              ensureAudio(); // débloque l'audio (geste utilisateur requis)
+              setSoundOn((s) => !s);
+            }}
           >
             {soundOn ? <Bell /> : <BellOff />}
             {soundOn ? "Son activé" : "Son coupé"}

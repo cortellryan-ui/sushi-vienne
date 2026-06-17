@@ -22,6 +22,7 @@ export const RESTAURANT = {
 } as const;
 
 /** Délai de préparation minimum (min) avant le premier créneau de retrait. */
-export const PREP_DELAY_MINUTES = Number(
-  process.env.PREP_DELAY_MINUTES ?? 20,
-);
+// `|| 20` (et non `??`) pour rattraper aussi une variable vide ("") ou non
+// numérique (NaN) — sinon le délai de préparation tomberait à 0.
+export const PREP_DELAY_MINUTES =
+  Number(process.env.PREP_DELAY_MINUTES) || 20;

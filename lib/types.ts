@@ -1,7 +1,6 @@
 /**
  * Types métier alignés sur le schéma Supabase (CLAUDE.md §5).
- * En mode maquette, les données viennent de lib/mock-data.ts ;
- * le branchement Supabase plus tard renverra la même forme.
+ * Les données proviennent de Supabase (catégories, plats, commandes…).
  */
 
 export type Category = {

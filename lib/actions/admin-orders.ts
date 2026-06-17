@@ -25,12 +25,18 @@ export async function updateOrderStatus(
   }
 
   if (status === "prete" || status === "terminee") {
+    // Transition légale uniquement : prête ← acceptée, terminée ← prête.
+    // Le `.eq("status", from)` empêche de forcer un statut incohérent via un
+    // appel direct à la Server Action (les boutons client ne suffisent pas).
+    const from = status === "prete" ? "acceptee" : "prete";
     const supabase = createClient();
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("orders")
       .update({ status })
-      .eq("id", id);
-    return { ok: !error };
+      .eq("id", id)
+      .eq("status", from)
+      .select("id");
+    return { ok: !error && (data?.length ?? 0) > 0 };
   }
 
   return { ok: false };

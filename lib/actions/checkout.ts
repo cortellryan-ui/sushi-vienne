@@ -47,7 +47,7 @@ export async function createOnlineCheckout(
   const built = buildOrderLines((products ?? []) as DbProduct[], input.items);
   if (!built.ok) return { ok: false, error: "unavailable" };
 
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   try {
     const session = await stripe.checkout.sessions.create({
